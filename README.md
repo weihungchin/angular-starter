@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Minimal starter project with service-worker and manifest.json. Lighthouse score of over 90+.
 
-##Steps used to generate this project
+## Steps used to generate this project
 (Assuming Angular CLI v1.6.9 is installed)
 
 1. Run:
