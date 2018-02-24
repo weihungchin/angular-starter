@@ -59,6 +59,7 @@ ng new projectName --service-worker --style=scss
 
 4. Add the following meta link tag into `index.html`. (Change the path reference to the path of your favicon)
 
+```
    <link rel="manifest" href="/manifest.json">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#363636">
@@ -67,7 +68,7 @@ ng new projectName --service-worker --style=scss
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
   <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
-
+```
   5. Add a `noscript` tag inside the `<body>` tag of `index.html`
 
   ```
