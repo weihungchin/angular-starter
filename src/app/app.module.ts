@@ -1,3 +1,6 @@
+import { CoreComponentModule } from './core/core.module';
+import { LoginModule } from './login/login.module';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
@@ -10,10 +13,11 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
 import { LandingComponent } from "./landing/landing.component";
+import { AngularFireModule } from "angularfire2";
+import { UserService } from "@app/services";
+import { AngularFireAuthModule } from "angularfire2/auth";
 
-const rootRoute = RouterModule.forRoot([
-  { path: "", pathMatch: "full", component: LandingComponent }
-]);
+
 
 @NgModule({
   declarations: [AppComponent, LandingComponent],
@@ -23,12 +27,13 @@ const rootRoute = RouterModule.forRoot([
       enabled: environment.production
     }),
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
-    rootRoute
+    AppRoutingModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    LoginModule,
+    CoreComponentModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

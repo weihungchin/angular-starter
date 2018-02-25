@@ -2,12 +2,26 @@
 // @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "~bootstrap/dist/css/bootstrap.min.css";
 
-body{
-    margin:0;
-    font-family: "Roboto", sans-serif;
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
 }
 
-.spacer{
-    flex:1 1 auto;
+.spacer {
+  flex: 1 1 auto;
+}
+
+html {
+  height: 100%;
+}
+
+.error-snackbar {
+  color: #fff;
+  background-color: rgba(211, 14, 14, 0.8);
+}
+
+.spinner-container {
+  margin: 15px auto;
 }

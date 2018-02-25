@@ -1,43 +1,127 @@
-$h1:  rgba(45,45,45,1);
-$blue: #98b5cc;
-$yellow: #ffcc00;
-$outline: rgba(#fff, .4);
-$shadow: rgba($yellow, .5);
+// $h1:  rgba(45,45,45,1);
+// $blue: #98b5cc;
+// $yellow: #ffcc00;
+// $outline: rgba(#fff, .4);
+// $shadow: rgba($yellow, .5);
 
 
-h1 {
+// h1 {
 	
-	font-size: 14vw;
-	text-align: center;
-	line-height: 1;
-	margin: 0;
-	top: 20%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	position: absolute;
-	color: $h1;
+// 	font-size: 14vw;
+// 	text-align: center;
+// 	line-height: 1;
+// 	margin: 0;
+// 	top: 20%;
+// 	left: 50%;
+// 	transform: translate(-50%, -50%);
+// 	position: absolute;
+// 	color: $h1;
 	
-	&:before {
-		content: attr(data-heading);
-		position: absolute;
-		overflow: hidden;
-		color: $yellow;
-		width: 100%;
-		z-index: 5;
-		text-shadow: none;
-		left: 34%;
-		text-align: left;
-		animation: flicker 3s linear infinite;
-	}
+// 	&:before {
+// 		content: attr(data-heading);
+// 		position: absolute;
+// 		overflow: hidden;
+// 		color: $yellow;
+// 		width: 100%;
+// 		z-index: 5;
+// 		text-shadow: none;
+// 		left: 34%;
+// 		text-align: left;
+// 		animation: flicker 3s linear infinite;
+// 	}
+// }
+
+// @keyframes flicker {
+// 	0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+// 		opacity: .99;
+// 		text-shadow: -1px -1px 0 $outline, 1px -1px 0 $outline, -1px 1px 0 $outline, 1px 1px 0 $outline, 0 -2px 8px, 0 0 2px, 0 0 5px #ff7e00, 0 0 15px #ff4444, 0 0 2px #ff7e00, 0 2px 3px #000;
+// 	}
+// 	20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+// 		opacity: 0.4;
+// 		text-shadow: none;
+// 	}
+// }
+
+
+
+
+
+
+$square: 32px;
+$duration: 5s;
+$hue-duration:1s;
+
+
+@keyframes square-animation {
+  0% {left: 0; top: 0}
+
+  10.5% {left: 0; top: 0;}
+  12.5% {left: $square; top: 0;}
+
+  23% {left: $square; top: 0;}
+  25% {left: $square * 2; top: 0;}
+
+  35.5% {left: $square * 2; top: 0;}
+  37.5% {left: $square * 2; top: $square;}
+
+  48% {left: $square * 2; top: $square;}
+  50% {left: $square; top: $square;}
+
+  60.5% {left: $square; top: $square;}
+  62.5% {left: $square; top: $square * 2;}
+
+  73% {left: $square; top: $square * 2;}
+  75% {left: 0; top: $square * 2;}
+
+  85.5% {left: 0; top: $square * 2;}
+  87.5% {left: 0; top: $square;}
+
+  98% {left: 0; top: $square;}
+  100% {left: 0; top: 0;}
 }
 
-@keyframes flicker {
-	0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
-		opacity: .99;
-		text-shadow: -1px -1px 0 $outline, 1px -1px 0 $outline, -1px 1px 0 $outline, 1px 1px 0 $outline, 0 -2px 8px, 0 0 2px, 0 0 5px #ff7e00, 0 0 15px #ff4444, 0 0 2px #ff7e00, 0 2px 3px #000;
-	}
-	20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
-		opacity: 0.4;
-		text-shadow: none;
-	}
+// Cycles through the different hues.
+@keyframes hue-rotate {
+  0% {filter: hue-rotate(0deg)}
+  100% {filter: hue-rotate(360deg)}
 }
+
+// Just some styles to get everything centred.
+.loader-container {
+  margin-top:120px;
+}
+
+// Set the rotation to '-135deg' to get a heart shaped loading indicator.
+.loading {
+  margin:10px auto;
+  position: relative;
+  width: $square * 3;
+  height: $square * 3;
+  transform: rotate(45deg);
+  animation: hue-rotate $hue-duration linear infinite both;
+}
+
+
+.loading__square {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $square - 4px;
+  height: $square - 4px;
+  margin: 2px;
+  border-radius: 2px;
+  background: #07a;
+  background-image: linear-gradient(45deg, #fa0 40%, #0c9 60%);
+  background-image: -moz-linear-gradient(#fa0, #fa0);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  animation: square-animation $duration ease-in-out infinite both;
+  
+  @for $i from 0 through 7 {
+    &:nth-of-type(#{$i}) {
+      animation-delay: -($duration / 7) * $i
+    }
+  }
+}
+
