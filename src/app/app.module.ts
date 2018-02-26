@@ -14,7 +14,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
 import { LandingComponent } from "./landing/landing.component";
 import { AngularFireModule } from "angularfire2";
-import { UserService } from "@app/services";
+import { UserService, AuthGuard } from "@app/services";
 import { AngularFireAuthModule } from "angularfire2/auth";
 
 
@@ -33,7 +33,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
     LoginModule,
     CoreComponentModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

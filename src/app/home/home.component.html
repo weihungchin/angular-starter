@@ -117,7 +117,29 @@
           </mat-expansion-panel> -->
 
           <ng-container *ngFor="let item of mobApplicantsData.filteredData" class="mt-5">
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+            <mat-card>
+               
+                    <mat-panel-title>
+                      {{item.name }}
+                    </mat-panel-title>
+                 
+                  <mat-panel-description class="mb-2" style = "display:block">
+                    <mat-icon class="mr-3 mt-2 float-left" style = "vertical-align:middle">phone</mat-icon> &nbsp;
+                    <div class = "float-left mt-2" style = "vertical-align:middle">{{item.mobile}}</div>
+                  </mat-panel-description>
+                  <mat-panel-description style = "display:block">
+                    <mat-icon class="mr-3 mt-2 float-left" style = "vertical-align:middle">email</mat-icon> &nbsp;
+                    <div class = "float-left mt-2" style = "vertical-align:middle">{{item.email}}</div>
+                    <span style="flex:1 1 auto"></span>
+                    <button mat-icon-button style="margin-top:-10px" class = "float-right">
+                      <mat-icon>file_download</mat-icon>
+                    </button>
+                  </mat-panel-description>
+            </mat-card>
+
+
+            <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{item.name }}
@@ -135,7 +157,7 @@
                   <mat-icon>file_download</mat-icon>
                 </button>
               </mat-panel-description>
-            </mat-expansion-panel>
+            </mat-expansion-panel> -->
           </ng-container>
 
           <button mat-fab color="accent" style="position:fixed; bottom:30px; right:30px">

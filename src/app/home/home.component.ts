@@ -11,6 +11,7 @@ import {
   style
 } from "@angular/animations";
 import * as kf from "./keyframes";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-home",
@@ -44,7 +45,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private cdRef: ChangeDetectorRef,
     private mediaMatcher: MediaMatcher,
     private ngFireDB: AngularFireDatabase,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
     this.mobQuery = mediaMatcher.matchMedia("(max-width: 760px)");
     this.mobQueryListener = () => cdRef.detectChanges();
@@ -58,7 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   logout() {
     this.userService.purgeAuth().subscribe(
       res => {
-        console.log(res);
+       this.router.navigateByUrl('');
       },
       err => console.log(err)
     );

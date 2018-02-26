@@ -1,5 +1,11 @@
+import { UserService } from "@app/services";
 import { Component } from "@angular/core";
-import { Router, NavigationEnd, NavigationError, NavigationCancel } from "@angular/router";
+import {
+  Router,
+  NavigationEnd,
+  NavigationError,
+  NavigationCancel
+} from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -7,7 +13,8 @@ import { Router, NavigationEnd, NavigationError, NavigationCancel } from "@angul
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  constructor(private router: Router) {
+  constructor(private router: Router, private userService: UserService) {
+    this.userService.attemptAuth();
     this.subscToRouterEvent();
   }
 
@@ -25,6 +32,7 @@ export class AppComponent {
     }
     if (e instanceof NavigationCancel) {
       console.log(e);
+      this.router.navigateByUrl("404");
     }
   }
 }

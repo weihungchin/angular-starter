@@ -37,7 +37,17 @@ export class UserService {
   }
 
   // call this once in app.component.ts only
-  attemptAuth(): Observable<any> {
+  attemptAuth() {
+   this.ngFireAuth.authState.map(res => {
+      this.handleAuthUser(res);
+      return res;
+    }).subscribe(
+      res => console.log(res),
+      err => console.log(err)
+    );
+  }
+
+  getUserProfile(): Observable<any> {
    return this.ngFireAuth.authState.map(res => {
       this.handleAuthUser(res);
       return res;

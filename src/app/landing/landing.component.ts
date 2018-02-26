@@ -1,4 +1,4 @@
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { UserService } from "@app/services";
 import { Component, OnInit } from "@angular/core";
 import { User } from "@app/models";
@@ -11,14 +11,18 @@ import { User } from "@app/models";
 export class LandingComponent implements OnInit {
   isShowLogin: boolean;
   currentUser: User;
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService, 
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.getUserProfile();
   }
 
   private getUserProfile() {
-    this.userService.attemptAuth().subscribe(
+    this.userService.getUserProfile().subscribe(
       res => {
         this.handleUser(res);
       },
@@ -31,7 +35,7 @@ export class LandingComponent implements OnInit {
   private handleUser(res) {
     if (res) {
       this.currentUser = this.toVO(res);
-      // redirect to home page ? or show button to link to home page;
+      this.router.navigate(['./home'], {relativeTo: this.activatedRoute});
     } else {
       this.isShowLogin = true;
       // this.router.navigateByUrl("login");
