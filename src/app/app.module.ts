@@ -16,11 +16,13 @@ import { LandingComponent } from "./landing/landing.component";
 import { AngularFireModule } from "angularfire2";
 import { UserService, AuthGuard } from "@app/services";
 import { AngularFireAuthModule } from "angularfire2/auth";
+import { ApplicantsComponent } from './applicants/applicants.component';
+import { ShowAuthedDirective } from './shared/show-authed.directive';
 
 
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent],
+  declarations: [AppComponent, LandingComponent, ShowAuthedDirective],
   imports: [
     BrowserModule,
     ServiceWorkerModule.register("/ngsw-worker.js", {
@@ -33,7 +35,7 @@ import { AngularFireAuthModule } from "angularfire2/auth";
     LoginModule,
     CoreComponentModule
   ],
-  providers: [UserService, AuthGuard],
+  providers: [UserService, AuthGuard, ShowAuthedDirective],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

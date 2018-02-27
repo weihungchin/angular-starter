@@ -1,0 +1,13 @@
+
+.side-card-container{
+    position:sticky; 
+    display:block;
+    float:right;
+    width:300px;
+}
+
+.card-wrapper{
+    display:block; 
+    max-height:600px; 
+    overflow:auto;
+}
