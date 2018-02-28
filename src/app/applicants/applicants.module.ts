@@ -6,6 +6,12 @@ import { ApplicantsComponent } from './applicants.component';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
     imports: [
@@ -13,7 +19,13 @@ import { MatButtonModule } from '@angular/material/button';
         ApplicantsRoutingModule,
         MatCardModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatGridListModule,
+        MatListModule,
+        FlexLayoutModule,
+        AngularFireDatabaseModule,
+        MatProgressSpinnerModule,
+        MatMenuModule
     ],
     exports: [],
     declarations: [ApplicantsComponent],

@@ -1,13 +1,145 @@
 
+
+
+.container-wrapper{
+    display:flex;
+}
+
 .side-card-container{
-    position:sticky; 
-    display:block;
-    float:right;
-    width:300px;
+  
+    flex: 1 2 200px;
 }
 
 .card-wrapper{
     display:block; 
-    max-height:600px; 
+    max-height:650px; 
     overflow:auto;
+    min-width: 300px;
+    min-height:500px;
 }
+
+.main-card-container{
+    flex: 4 1 500px;
+}
+
+.main-card {
+    height:100%;
+}
+
+.side-card:hover{
+    background-color:rgba(0,0,0,0.12);
+}
+
+@keyframes rotateInDownLeft {
+    from {
+     
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  
+    to {
+ 
+      transform: rotate3d(0, 0, 1, 90deg);
+      opacity: 1;
+    }
+  }
+  
+  .rotate-down {
+    animation:0.5s 0s rotateInDownLeft;
+    animation-fill-mode: forwards;
+  }
+  
+  
+  @keyframes rotateInUpRight {
+    from {
+      transform: rotate3d(0, 0, 1, 90deg);
+    }
+  
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  .rotate-up {
+    animation:0.5s 0s rotateInUpRight;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      display:inherit;
+    }
+  
+    to {
+      opacity: 0;
+      display:none;
+    }
+  }
+  
+  .fade-out {
+    animation:2s 0s fadeOut;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+
+  .fade-in {
+    animation:2s 0s fadeIn;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes rotate45CW {
+    from {
+        transform:rotate3d(0,0,0);
+    }
+    to {
+        transform:rotate3d(0,0,1,45deg);
+        
+    }
+  }
+
+  @keyframes rotate45ACW {
+    from {
+        transform:rotate3d(0,0,1,45deg);
+        
+    }
+    to {
+        transform:rotate3d(0,0,0);
+       
+    }
+  }
+
+  .rotate-45-cw{
+      animation:0.2s 0s rotate45CW;
+      animation-fill-mode: forwards;
+  }
+
+  .rotate-45-acw{
+      animation:0.2s 0s rotate45ACW;
+      animation-fill-mode: forwards;
+  }
+
+
+  mat-list-item:hover{
+      background-color:rgba(0,0,0,0.12);
+      cursor:pointer;
+  }
+
+  .filter-list-icon{
+      opacity:0;
+  }
+
+  .hover-show{
+    &:hover .filter-list-icon{
+        opacity:1;
+    }
+  }

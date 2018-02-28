@@ -1,186 +1,161 @@
-<div class="side-card-container">
+<div class="container-wrapper">
+  <div class="main-card-container mr-1">
 
-  <div class="card-wrapper">
-    <mat-card class="example-card mb-2" style="max-width:300px">
+    <mat-card class="main-card" *ngIf="showFilter">
+      <mat-card-title> Filter Criteria</mat-card-title>
+      <button [matMenuTriggerFor]="menu" mat-mini-fab class="float-right" (click)="onAddFilter()" [ngClass]="{'rotate-45-cw':showFilterList, 'rotate-45-acw':!showFilterList}"
+        (menuClosed)="onMenuClosed($event)">
+        <mat-icon>add</mat-icon>
+      </button>
 
+      <mat-menu #menu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
+        <button mat-menu-item class="hover-show" *ngFor = "let item of filterList" (click) = "onSelectFilter(item)">
+          <mat-icon class="filter-list-icon">add_circle_outline</mat-icon>
+          <span>{{item.value}}</span>
+        </button>
+      </mat-menu>
 
-      <!-- <mat-card-header>
-        <div class="example-header-image"></div>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header> -->
-      <p style = "display:inline">
-         
-         <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-         </p>
-         <mat-card-subtitle style = "display:inline; padding-left:10px">Alex Moore</mat-card-subtitle>
+      <mat-list role="list">
+        <mat-list-item role="listitem" class = "hover-show"  *ngFor = "let item of selectedFilterList">
+            {{item.value}}
+          <button  class="ml-3 filter-list-icon" mat-icon-button >
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+      <button mat-raised-button color = "primary" style = "position:absolute; bottom:20px; right:20px">Export</button>
+    </mat-card>
+
+    <mat-card class="main-card" *ngIf="!showFilter">
+
+      <button mat-icon-button class="float-right">
+        <mat-icon>description</mat-icon>
+      </button>
+
+      <button mat-icon-button class="float-right">
+        <mat-icon>mode_edit</mat-icon>
+      </button>
+
+      <mat-card-header>
+        <mat-card-title>{{selectedApplicant.name}}</mat-card-title>
+        <mat-card-subtitle>
+          <mat-icon style="vertical-align:middle; margin-top:-5px;" class="mr-2">work</mat-icon>Software Engineer</mat-card-subtitle>
+      </mat-card-header>
+      <img style="display:block; margin:0 auto; width:150px; height:150px" src="../../assets/images/circle-person-300.png" alt="Photo of a Shiba Inu">
+
       <mat-card-content>
-      
-     
 
-
-        <div class="w-100 mb-3">
-          <mat-icon class="mr-3 mt-2 float-left" style="vertical-align:middle">phone</mat-icon> &nbsp;
-          <div class="float-left mt-2" style="vertical-align:middle">123123123</div>
-        </div>
-
-        <div class="w-100">
-            <mat-icon class="mr-3 mt-2 float-left" style="vertical-align:middle">email</mat-icon> &nbsp;
-            <div class="float-left mt-2" style="vertical-align:middle">email@email.com</div>
+        <div class="content-wrapper" class="mt-5">
+          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+            <div fxFlex="50">
+              <mat-icon>email</mat-icon>
+              <p>{{selectedApplicant.email}}</p>
+            </div>
+            <div fxFlex="50">
+              <mat-icon>phone</mat-icon>
+              <p>{{selectedApplicant.mobile}}</p>
+            </div>
           </div>
 
+          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+            <div fxFlex="50">
+              <mat-icon>date_range</mat-icon>
+              <p>{{selectedApplicant.email}}</p>
+            </div>
+            <div fxFlex="50">
+              <mat-icon>language</mat-icon>
+              <p>{{selectedApplicant.mobile}}</p>
+            </div>
+          </div>
+
+          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+            <div fxFlex="50">
+              <i class="fa fa-address-book-o fa-normal-size" aria-hidden="true"></i>
+              <p>{{'-'}}</p>
+            </div>
+            <div fxFlex="50">
+              <i class="fa fa-university fa-normal-size" aria-hidden="true"></i>
+              <p>{{selectedApplicant.mobile}}</p>
+            </div>
+          </div>
+
+          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+            <div fxFlex="50">
+              <i class="fa fa-usd fa-normal-size" aria-hidden="true"></i>
+              <p>{{selectedApplicant.email}}</p>
+            </div>
+            <div fxFlex="50">
+              <mat-icon>phone</mat-icon>
+              <p>{{selectedApplicant.mobile}}</p>
+            </div>
+          </div>
+
+          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+            <div fxFlex="50">
+              <mat-icon>email</mat-icon>
+              <p>{{selectedApplicant.email}}</p>
+            </div>
+            <div fxFlex="50">
+              <mat-icon>phone</mat-icon>
+              <p>{{selectedApplicant.mobile}}</p>
+            </div>
+          </div>
+
+          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+            <div fxFlex="50">
+              <mat-icon>email</mat-icon>
+              <p>{{selectedApplicant.email}}</p>
+            </div>
+            <div fxFlex="50">
+              <mat-icon>phone</mat-icon>
+              <p>{{selectedApplicant.mobile}}</p>
+            </div>
+          </div>
+        </div>
+
+
       </mat-card-content>
-      <!-- <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions> -->
-    </mat-card>
 
-    <mat-card class="example-card" style="max-width:300px">
-
-
-      <mat-card-header>
-        <div class="example-header-image"></div>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-          very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card class="example-card" style="max-width:300px">
-
-
-      <mat-card-header>
-        <div class="example-header-image"></div>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-          very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card class="example-card" style="max-width:300px">
-
-
-      <mat-card-header>
-        <div class="example-header-image"></div>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-          very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card class="example-card" style="max-width:300px">
-
-
-      <mat-card-header>
-        <div class="example-header-image"></div>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-          very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card class="example-card" style="max-width:300px">
-
-
-      <mat-card-header>
-        <div class="example-header-image"></div>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-          very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card>
-
-    <mat-card class="example-card" style="max-width:300px">
-
-
-      <mat-card-header>
-        <div class="example-header-image"></div>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-          very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
     </mat-card>
   </div>
+  <div class="side-card-container">
 
-</div>
 
-<div class="main-card-container" style = "float:left; flex-grow:1">
-  <mat-card>
-      <mat-card-header>
-          <mat-card-title>Title</mat-card-title>
-          <mat-card-subtitle>Subtitle</mat-card-subtitle>
-      </mat-card-header>
-     
-      <mat-card-content>
-          Text content
-      </mat-card-content>
-      <mat-card-actions align="start">
-          <button mat-button (click)="onAction1">Action1</button>
-          
-      </mat-card-actions>
-      <mat-card-footer>
-          Footer
-      </mat-card-footer>
-  </mat-card>
+
+    <div class="card-wrapper" style="cursor:pointer">
+      <mat-progress-spinner class="spinner-container" *ngIf="isLoading"></mat-progress-spinner>
+      <mat-card class="side-card mb-2" *ngFor="let person of applicantsData" (click)="onClickSideCard(person)">
+
+        <p style="display:inline">
+          <!-- <mat-icon>person_pin</mat-icon> -->
+          <img mat-card-avatar src="../../assets/images/circle-person.png" alt="Photo of a Shiba Inu">
+        </p>
+
+        <mat-card-subtitle style="display:inline; padding-left:10px">{{person.name}}</mat-card-subtitle>
+        <mat-card-content>
+
+          <div class="w-100 mb-3">
+            <mat-icon class="mr-3 mt-2 float-left" style="vertical-align:middle">phone</mat-icon> &nbsp;
+            <div class="float-left mt-2" style="vertical-align:middle">{{person.mobile}}</div>
+          </div>
+
+          <div class="w-100">
+            <mat-icon class="mr-3 mt-2 float-left" style="vertical-align:middle">email</mat-icon> &nbsp;
+            <div class="float-left mt-2" style="vertical-align:middle">{{person.email}}</div>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+
+    </div>
+
+    <button mat-fab style="position:fixed; bottom:30px; right:30px" (click)="toggleFilter()" [ngClass]="{'rotate-down':showFilter, 'rotate-up':!showFilter}">
+      <i class="fa fa-filter fa-normal-size" aria-hidden="true" [ngClass]="{'fade-out':showFilter}" [hidden]="showFilter"></i>
+      <mat-icon [ngClass]="{'fade-in':!showFilter}" [hidden]="!showFilter">close</mat-icon>
+    </button>
+
+
+  </div>
+
 </div>
