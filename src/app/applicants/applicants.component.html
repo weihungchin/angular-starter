@@ -1,47 +1,136 @@
 <div class="container-wrapper">
+
+  <div class="side-card-container mr-2">
+    <mat-tab-group class="side-card-wrapper">
+      <mat-tab label="Pending (12)">
+        <div class="side-card-wrapper" style="cursor:pointer">
+          <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
+          <mat-card class="side-card mb-2" *ngFor="let person of applicantsData" (click)="onClickSideCard(person)">
+
+            <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
+              <div fxFlex="20%" fxFlexAlign="center">
+                <img mat-card-avatar src="../../assets/images/circle-person.png" alt="Avatar Photo">
+              </div>
+              <div fxFlex="50%" fxFlexAlign="stretch">
+                <h5> {{person.name}}</h5>
+                <div fxLayout fxLayoutAlign="start start" class="mt-1">
+                  <mat-icon style="vertical-align:middle" fxFlex="15%">work</mat-icon> &nbsp;
+                  <div style="vertical-align:middle" fxFlex>UI / UX</div>
+                </div>
+                <div fxLayout fxLayoutAlign="start start">
+                  <mat-icon class="text-gray" fxFlex="15%">date_range</mat-icon> &nbsp;
+                  <div class="text-gray " fxFlex>22/02/2018</div>
+                </div>
+              </div>
+
+              <div class="spacer"></div>
+
+              <div fxFlex fxFlexAlign="center">
+                Pending
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="Accepted (54)">
+        <div class="side-card-wrapper" style="cursor:pointer">
+          <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
+          <mat-card class="side-card mb-2" *ngFor="let person of applicantsData" (click)="onClickSideCard(person)">
+
+            <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
+              <div fxFlex="20%" fxFlexAlign="center">
+                <img mat-card-avatar src="../../assets/images/circle-person.png" alt="Avatar Photo">
+              </div>
+              <div fxFlex="50%" fxFlexAlign="stretch">
+                <h5> {{person.name}}</h5>
+                <mat-icon class="mr-3 mt-2 float-left" style="vertical-align:middle">work</mat-icon> &nbsp;
+                <div class="float-left mt-2" style="vertical-align:middle">{{person.mobile}}</div>
+                <mat-icon class="mr-3 mt-2 float-left text-gray" style="vertical-align:middle">date_range</mat-icon> &nbsp;
+                <div class="text-gray mt-2 float-left" style="vertical-align:middle">{{person.mobile}}</div>
+              </div>
+
+              <div class="spacer"></div>
+
+              <div fxFlex fxFlexAlign="center">
+                Rejected
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="Rejected (46)">
+        <div class="side-card-wrapper" style="cursor:pointer">
+          <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
+          <mat-card class="side-card mb-2" *ngFor="let person of applicantsData" (click)="onClickSideCard(person)">
+
+            <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
+              <div fxFlex="20%" fxFlexAlign="center">
+                <img mat-card-avatar src="../../assets/images/circle-person.png" alt="Avatar Photo">
+              </div>
+              <div fxFlex="50%" fxFlexAlign="stretch">
+                <h5> {{person.name}}</h5>
+                <mat-icon class="mr-3 mt-2 float-left" style="vertical-align:middle">work</mat-icon> &nbsp;
+                <div class="float-left mt-2" style="vertical-align:middle">{{person.mobile}}</div>
+                <mat-icon class="mr-3 mt-2 float-left text-gray" style="vertical-align:middle">date_range</mat-icon> &nbsp;
+                <div class="text-gray mt-2 float-left" style="vertical-align:middle">{{person.mobile}}</div>
+              </div>
+
+              <div class="spacer"></div>
+
+              <div fxFlex fxFlexAlign="center">
+                Accepted
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
   <div class="main-card-container mr-1">
 
-    <mat-card class="main-card" *ngIf="showFilter">
-      <mat-card-title> Filter Criteria</mat-card-title>
-      <button [matMenuTriggerFor]="menu" mat-mini-fab class="float-right" (click)="onAddFilter()" [ngClass]="{'rotate-45-cw':showFilterList, 'rotate-45-acw':!showFilterList}"
-        (menuClosed)="onMenuClosed($event)">
-        <mat-icon>add</mat-icon>
-      </button>
+    <app-filter [hidden]="!showFilter"></app-filter>
 
-      <mat-menu #menu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
-        <button mat-menu-item class="hover-show" *ngFor = "let item of filterList" (click) = "onSelectFilter(item)">
-          <mat-icon class="filter-list-icon">add_circle_outline</mat-icon>
-          <span>{{item.value}}</span>
-        </button>
-      </mat-menu>
+    <mat-card class="main-card" *ngIf="!showFilter" [ngClass]="{'flip-out-y': showFilter}">
 
-      <mat-list role="list">
-        <mat-list-item role="listitem" class = "hover-show"  *ngFor = "let item of selectedFilterList">
-            {{item.value}}
-          <button  class="ml-3 filter-list-icon" mat-icon-button >
-            <mat-icon>add_circle_outline</mat-icon>
-          </button>
-        </mat-list-item>
-      </mat-list>
-      <button mat-raised-button color = "primary" style = "position:absolute; bottom:20px; right:20px">Export</button>
-    </mat-card>
-
-    <mat-card class="main-card" *ngIf="!showFilter">
-
-      <button mat-icon-button class="float-right">
+      <button mat-mini-fab class="float-right ml-2 bg-gray">
         <mat-icon>description</mat-icon>
       </button>
 
-      <button mat-icon-button class="float-right">
+      <button mat-mini-fab class="float-right bg-gray">
         <mat-icon>mode_edit</mat-icon>
       </button>
 
-      <mat-card-header>
+      <div fxLayout fxLayoutAlign="start start" fxLayoutGap = "20px" fxLayout.sm = "column">
+        <div fxFlex="30%" fxFlexAlign="center" class = "mr-3">
+          <img style="display:block; width:150px; height:150px" src="../../assets/images/circle-person-300.png" alt="Avatar Photo">
+        </div>
+        <div fxFlex fxFlexAlign="center" >
+          <h4>{{selectedApplicant.name}}</h4>
+          <div fxLayout fxLayoutAlign="start start" class="mt-1">
+            <mat-icon style="vertical-align:middle" fxFlex="15%">phone</mat-icon> &nbsp;
+            <div style="vertical-align:middle" fxFlex>{{selectedApplicant.mobile}}</div>
+          </div>
+          <div fxLayout fxLayoutAlign="start start" class="mt-1">
+              <mat-icon style="vertical-align:middle" fxFlex="15%">email</mat-icon> &nbsp;
+              <div style="vertical-align:middle" fxFlex>{{selectedApplicant.email}}</div>
+            </div>
+            <div fxLayout fxLayoutAlign="start start" class="mt-1">
+                <mat-icon style="vertical-align:middle" fxFlex="15%">language</mat-icon> &nbsp;
+                <div style="vertical-align:middle" fxFlex>Malaysian</div>
+              </div>
+        </div>
+      </div>
+
+
+      <!-- <mat-card-header>
         <mat-card-title>{{selectedApplicant.name}}</mat-card-title>
         <mat-card-subtitle>
           <mat-icon style="vertical-align:middle; margin-top:-5px;" class="mr-2">work</mat-icon>Software Engineer</mat-card-subtitle>
       </mat-card-header>
-      <img style="display:block; margin:0 auto; width:150px; height:150px" src="../../assets/images/circle-person-300.png" alt="Photo of a Shiba Inu">
+
+
+      <img style="display:block; width:150px; height:150px" src="../../assets/images/circle-person-300.png" alt="Avatar Photo"> -->
 
       <mat-card-content>
 
@@ -118,44 +207,9 @@
 
     </mat-card>
   </div>
-  <div class="side-card-container">
 
-
-
-    <div class="card-wrapper" style="cursor:pointer">
-      <mat-progress-spinner class="spinner-container" *ngIf="isLoading"></mat-progress-spinner>
-      <mat-card class="side-card mb-2" *ngFor="let person of applicantsData" (click)="onClickSideCard(person)">
-
-        <p style="display:inline">
-          <!-- <mat-icon>person_pin</mat-icon> -->
-          <img mat-card-avatar src="../../assets/images/circle-person.png" alt="Photo of a Shiba Inu">
-        </p>
-
-        <mat-card-subtitle style="display:inline; padding-left:10px">{{person.name}}</mat-card-subtitle>
-        <mat-card-content>
-
-          <div class="w-100 mb-3">
-            <mat-icon class="mr-3 mt-2 float-left" style="vertical-align:middle">phone</mat-icon> &nbsp;
-            <div class="float-left mt-2" style="vertical-align:middle">{{person.mobile}}</div>
-          </div>
-
-          <div class="w-100">
-            <mat-icon class="mr-3 mt-2 float-left" style="vertical-align:middle">email</mat-icon> &nbsp;
-            <div class="float-left mt-2" style="vertical-align:middle">{{person.email}}</div>
-          </div>
-
-        </mat-card-content>
-      </mat-card>
-
-
-    </div>
-
-    <button mat-fab style="position:fixed; bottom:30px; right:30px" (click)="toggleFilter()" [ngClass]="{'rotate-down':showFilter, 'rotate-up':!showFilter}">
-      <i class="fa fa-filter fa-normal-size" aria-hidden="true" [ngClass]="{'fade-out':showFilter}" [hidden]="showFilter"></i>
-      <mat-icon [ngClass]="{'fade-in':!showFilter}" [hidden]="!showFilter">close</mat-icon>
-    </button>
-
-
-  </div>
-
+  <button mat-fab style="position:fixed; bottom:30px; right:30px" (click)="toggleFilter()" [ngClass]="{'rotate-down':showFilter, 'rotate-up':!showFilter}">
+    <i class="fa fa-filter fa-normal-size" aria-hidden="true" [ngClass]="{'fade-out':showFilter}" [hidden]="showFilter"></i>
+    <mat-icon [ngClass]="{'fade-in':!showFilter}" [hidden]="!showFilter">close</mat-icon>
+  </button>
 </div>

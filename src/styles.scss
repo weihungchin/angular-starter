@@ -4,6 +4,19 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
+$gray: rgba(0,0,0,.54);
+
+h1, h2, h3, h4, h5, h6, h7{
+  margin:0;
+  padding:0;
+}
+
+.bg-gray{
+  background-color:$gray !important;
+}
+.text-gray{
+  color:$gray !important;
+}
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;

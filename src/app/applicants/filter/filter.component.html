@@ -1,0 +1,20 @@
+<mat-card class="main-card">
+  <mat-card-title> Filter Criteria</mat-card-title>
+
+  <button mat-raised-button color="primary" style="position:absolute; top:20px; right:20px">Export</button>
+
+  <mat-expansion-panel *ngFor = "let groupItem of filterList">
+    <mat-expansion-panel-header>
+     
+      <mat-panel-title>
+      <mat-checkbox (change)="onGroupCheck($event, list)" class = "mr-3"></mat-checkbox>{{groupItem.groupLabel}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-selection-list #list (selectionChange)="onSelectChange($event)">
+      <mat-list-option *ngFor="let item of groupItem.groupList" [value] = "item.key" >
+        {{item.label}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-expansion-panel>
+</mat-card>
