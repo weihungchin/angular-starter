@@ -93,32 +93,32 @@
 
     <mat-card class="main-card" *ngIf="!showFilter" [ngClass]="{'flip-out-y': showFilter}">
 
-      <button mat-mini-fab class="float-right ml-2 bg-gray">
+      <!-- <button mat-mini-fab class="float-right ml-2 bg-gray">
         <mat-icon>description</mat-icon>
       </button>
 
       <button mat-mini-fab class="float-right bg-gray">
         <mat-icon>mode_edit</mat-icon>
-      </button>
+      </button> -->
 
-      <div fxLayout fxLayoutAlign="start start" fxLayoutGap = "20px" fxLayout.sm = "column">
-        <div fxFlex="30%" fxFlexAlign="center" class = "mr-3">
+      <div fxLayout fxLayoutAlign="start start" fxLayoutGap="20px" fxLayout.md="column" fxLayout.sm = "column" fxLayout.xs = "column">
+        <div fxFlex="30%" fxFlexAlign="center" class="mr-3" fxFlex.md="100%" fxFlex.sm="100%">
           <img style="display:block; width:150px; height:150px" src="../../assets/images/circle-person-300.png" alt="Avatar Photo">
         </div>
-        <div fxFlex fxFlexAlign="center" >
+        <div fxFlex fxFlexAlign="center">
           <h4>{{selectedApplicant.name}}</h4>
           <div fxLayout fxLayoutAlign="start start" class="mt-1">
-            <mat-icon style="vertical-align:middle" fxFlex="15%">phone</mat-icon> &nbsp;
+            <mat-icon style="vertical-align:middle" fxFlex="15%" fxFlex.md = "20%">phone</mat-icon> &nbsp;
             <div style="vertical-align:middle" fxFlex>{{selectedApplicant.mobile}}</div>
           </div>
+          <!-- <div fxLayout fxLayoutAlign="start start" class="mt-1">
+            <mat-icon style="vertical-align:middle" fxFlex="15%" fxFlex.md = "20%">email</mat-icon> &nbsp;
+            <div style="vertical-align:middle" fxFlex>{{selectedApplicant.email}}</div>
+          </div> -->
           <div fxLayout fxLayoutAlign="start start" class="mt-1">
-              <mat-icon style="vertical-align:middle" fxFlex="15%">email</mat-icon> &nbsp;
-              <div style="vertical-align:middle" fxFlex>{{selectedApplicant.email}}</div>
-            </div>
-            <div fxLayout fxLayoutAlign="start start" class="mt-1">
-                <mat-icon style="vertical-align:middle" fxFlex="15%">language</mat-icon> &nbsp;
-                <div style="vertical-align:middle" fxFlex>Malaysian</div>
-              </div>
+            <mat-icon style="vertical-align:middle" fxFlex="15%" fxFlex.md = "20%">language</mat-icon> &nbsp;
+            <div style="vertical-align:middle" fxFlex>Malaysian</div>
+          </div>
         </div>
       </div>
 
