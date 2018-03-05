@@ -16,6 +16,8 @@ import { FilterComponent } from "./filter/filter.component";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatSelectModule } from "@angular/material/select";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @NgModule({
   imports: [
@@ -32,7 +34,9 @@ import { MatTabsModule } from "@angular/material/tabs";
     MatMenuModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule,
+    MatFormFieldModule
   ],
   exports: [],
   declarations: [ApplicantsComponent, FilterComponent],

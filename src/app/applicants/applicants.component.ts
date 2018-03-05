@@ -26,7 +26,17 @@ export class ApplicantsComponent implements OnInit {
   };
   applicantsData: any;
   isLoading = true;
-  constructor(private ngFireDB: AngularFireDatabase) {}
+  statusList: any = [
+    { key: 's', value: "Scheduled" },
+    { key: 'o', value: 'On-Hold' },
+    { key: 'sl', value: 'Shortlisted' }
+  ]
+  selectedStatus = this.statusList[0].key
+
+
+ 
+
+  constructor(private ngFireDB: AngularFireDatabase) { }
 
   ngOnInit() {
     this.getApplicants(WebConstants.APPLICANTS_PATH);
@@ -40,9 +50,10 @@ export class ApplicantsComponent implements OnInit {
       .subscribe(
         data => {
           this.applicantsData = [...data];
+          this.applicantsData.map(this.bindSelectedAttr).map(this.defaultSelected);
           this.isLoading = false;
           this.selectedApplicant = { ...this.applicantsData[0] };
-          console.log("applicants data", this.selectedApplicant);
+          console.log("applicants data", this.applicantsData);
         },
         err => {
           console.log(err);
@@ -50,8 +61,27 @@ export class ApplicantsComponent implements OnInit {
       );
   }
 
+  private bindSelectedAttr(item){
+    item['selected'] = false;
+    return item;
+  }
+  private defaultSelected(item, index){
+    if(index == 0){
+      item.selected = true;
+    }
+    return item;
+  }
+
   onClickSideCard(e) {
+    this.applicantsData =[...this.applicantsData.map(this.setSelected(e))];
     this.selectedApplicant = Object.assign({}, e);
+  }
+
+  private setSelected(selectedItem){
+    return (item) => {
+      item.selected = selectedItem.id == item.id;
+      return item;
+    }
   }
 
   toggleFilter() {
@@ -67,7 +97,7 @@ export class ApplicantsComponent implements OnInit {
     this.showFilterList = !this.showFilterList;
   }
 
-  onSelectFilter(e){
+  onSelectFilter(e) {
     this.selectedFilterList = [...this.selectedFilterList, e];
     console.log(this.selectedFilterList);
   }

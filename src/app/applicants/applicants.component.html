@@ -5,17 +5,17 @@
       <mat-tab label="Pending (12)">
         <div class="side-card-wrapper" style="cursor:pointer">
           <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
-          <mat-card class="side-card mb-2" *ngFor="let person of applicantsData" (click)="onClickSideCard(person)">
+          <mat-card *ngFor="let person of applicantsData" (click)="onClickSideCard(person)" [ngClass] = "{'side-card-selected':person.selected, 'side-card':!person.selected}">
 
             <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
               <div fxFlex="20%" fxFlexAlign="center">
                 <img mat-card-avatar src="../../assets/images/circle-person.png" alt="Avatar Photo">
               </div>
               <div fxFlex="50%" fxFlexAlign="stretch">
-                <h5> {{person.name}}</h5>
+                <h6> {{person.name}}</h6>
                 <div fxLayout fxLayoutAlign="start start" class="mt-1">
-                  <mat-icon style="vertical-align:middle" fxFlex="15%">work</mat-icon> &nbsp;
-                  <div style="vertical-align:middle" fxFlex>UI / UX</div>
+                  <mat-icon class = "text-gray side-card-tex"  fxFlex="15%">work</mat-icon> &nbsp;
+                  <div class = "text-gray side-card-text" fxFlex>UI / UX</div>
                 </div>
                 <div fxLayout fxLayoutAlign="start start">
                   <mat-icon class="text-gray" fxFlex="15%">date_range</mat-icon> &nbsp;
@@ -91,125 +91,184 @@
 
     <app-filter [hidden]="!showFilter"></app-filter>
 
-    <mat-card class="main-card" *ngIf="!showFilter" [ngClass]="{'flip-out-y': showFilter}">
+    <mat-card class="main-card p-0" *ngIf="!showFilter" [ngClass]="{'flip-out-y': showFilter}">
 
-      <!-- <button mat-mini-fab class="float-right ml-2 bg-gray">
-        <mat-icon>description</mat-icon>
-      </button>
-
-      <button mat-mini-fab class="float-right bg-gray">
-        <mat-icon>mode_edit</mat-icon>
-      </button> -->
-
-      <div fxLayout fxLayoutAlign="start start" fxLayoutGap="20px" fxLayout.md="column" fxLayout.sm = "column" fxLayout.xs = "column">
+      <div class="main-card-header" fxLayout fxLayoutAlign="start stretch" fxLayoutGap="20px" fxLayout.md="column" fxLayout.sm="column"
+        fxLayout.xs="column">
         <div fxFlex="30%" fxFlexAlign="center" class="mr-3" fxFlex.md="100%" fxFlex.sm="100%">
-          <img style="display:block; width:150px; height:150px" src="../../assets/images/circle-person-300.png" alt="Avatar Photo">
+          <img class="main-avatar" src="../../assets/images/circle-person-300.png" alt="Avatar Photo">
         </div>
-        <div fxFlex fxFlexAlign="center">
-          <h4>{{selectedApplicant.name}}</h4>
-          <div fxLayout fxLayoutAlign="start start" class="mt-1">
-            <mat-icon style="vertical-align:middle" fxFlex="15%" fxFlex.md = "20%">phone</mat-icon> &nbsp;
-            <div style="vertical-align:middle" fxFlex>{{selectedApplicant.mobile}}</div>
+        <div fxFlex="35%" fxFlexAlign="center" class="mt-2">
+          <h5>
+            <b>{{selectedApplicant.name}}</b>
+          </h5>
+          <div fxLayout fxLayoutAlign="start start" class="mt-3 main-card-text">
+            <mat-icon fxFlex="15%" fxFlex.md="20%" fxFlex.lg="7%" class = "mr-2">phone</mat-icon> &nbsp;
+            <div fxFlex>{{selectedApplicant.mobile}}</div>
           </div>
-          <!-- <div fxLayout fxLayoutAlign="start start" class="mt-1">
-            <mat-icon style="vertical-align:middle" fxFlex="15%" fxFlex.md = "20%">email</mat-icon> &nbsp;
-            <div style="vertical-align:middle" fxFlex>{{selectedApplicant.email}}</div>
-          </div> -->
-          <div fxLayout fxLayoutAlign="start start" class="mt-1">
-            <mat-icon style="vertical-align:middle" fxFlex="15%" fxFlex.md = "20%">language</mat-icon> &nbsp;
-            <div style="vertical-align:middle" fxFlex>Malaysian</div>
+          <div fxLayout fxLayoutAlign="start start" class="mt-3 main-card-text">
+            <mat-icon fxFlex="15%"  fxFlex.md="20%" fxFlex.lg="7%" class = "mr-2">email</mat-icon> &nbsp;
+            <div fxFlex>{{selectedApplicant.email}}</div>
           </div>
+          <div fxLayout fxLayoutAlign="start start" class="mt-3 main-card-text">
+            <mat-icon fxFlex="15%" fxFlex.md="20%" fxFlex.lg="7%" class = "mr-2">language</mat-icon> &nbsp;
+            <div fxFlex>Malaysian</div>
+          </div>
+        </div>
+
+        <div fxFlex="35%" fxFlexAlign="center" class="mt-2">
+          <div class="main-card-label">Status</div>
+          <div>
+            <mat-form-field>
+              <mat-select [(value)]="selectedStatus">
+                <mat-option [value]="status.key" *ngFor="let status of statusList">{{status.value}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="50px">
+            <button mat-mini-fab class="ml-4 bg-gray">
+              <mat-icon>description</mat-icon>
+            </button>
+            <button mat-mini-fab class="bg-gray">
+              <mat-icon>mode_edit</mat-icon>
+            </button>
+          </div>
+
         </div>
       </div>
 
-
-      <!-- <mat-card-header>
-        <mat-card-title>{{selectedApplicant.name}}</mat-card-title>
-        <mat-card-subtitle>
-          <mat-icon style="vertical-align:middle; margin-top:-5px;" class="mr-2">work</mat-icon>Software Engineer</mat-card-subtitle>
-      </mat-card-header>
-
-
-      <img style="display:block; width:150px; height:150px" src="../../assets/images/circle-person-300.png" alt="Avatar Photo"> -->
-
       <mat-card-content>
 
-        <div class="content-wrapper" class="mt-5">
-          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
-            <div fxFlex="50">
-              <mat-icon>email</mat-icon>
-              <p>{{selectedApplicant.email}}</p>
+        <div class="content-wrapper">
+
+          <div class="row-wrapper bt-gray" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md = "column" >
+            <div fxFlex="50%" fxLayout="column" fxLayoutAlign="start stretch" class="pr-4 py-2" [ngClass.lg] = "{'br-gray':true}" [ngClass.lt-lg] = "{'px-3':true}">
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Primary Skills</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  UI / UX
+                </p>
+              </div>
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Secondary Skills</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, assumenda eaque consequuntur ratione
+              </div>
+
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Years of Experience</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  2
+              </div>
             </div>
-            <div fxFlex="50">
-              <mat-icon>phone</mat-icon>
-              <p>{{selectedApplicant.mobile}}</p>
+            <div fxFlex="50%" class="py-2 pr-4" fxLayout="column" fxLayoutAlign="start stretch" [ngClass.lt-lg] = "{'bt-gray px-3':true}" [ngClass.lg] = "{'pl-4':true}" >
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Channel</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  Agent
+              </div>
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Recruiter</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  Tan Meng Meng
+              </div>
+            </div>
+          
+          </div>
+
+          <div class="row-wrapper bt-gray" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md = "column" >
+            <div fxFlex="50%" fxLayout="column" fxLayoutAlign="start stretch" class="pr-4 py-2" [ngClass.lg] = "{'br-gray':true}" [ngClass.lt-lg] = "{'px-3':true}">
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Company</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  Maxis
+                </p>
+              </div>
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Remuneration</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  Lorem, ipsum dol
+              </div>
+
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Benefits</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  /
+              </div>
+
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Reason for Leaving</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  Explore new opportunity
+              </div>
+            </div>
+            <div fxFlex="50%" class="py-2 pr-4" fxLayout="column" fxLayoutAlign="start stretch" [ngClass.lt-lg] = "{'bt-gray px-3':true}" [ngClass.lg] = "{'pl-4':true}">
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">University</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  London School of Design and Marketing
+              </div>
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Studies</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  Design MA
+              </div>
             </div>
           </div>
 
-          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
-            <div fxFlex="50">
-              <mat-icon>date_range</mat-icon>
-              <p>{{selectedApplicant.email}}</p>
-            </div>
-            <div fxFlex="50">
-              <mat-icon>language</mat-icon>
-              <p>{{selectedApplicant.mobile}}</p>
-            </div>
-          </div>
 
-          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
-            <div fxFlex="50">
-              <i class="fa fa-address-book-o fa-normal-size" aria-hidden="true"></i>
-              <p>{{'-'}}</p>
-            </div>
-            <div fxFlex="50">
-              <i class="fa fa-university fa-normal-size" aria-hidden="true"></i>
-              <p>{{selectedApplicant.mobile}}</p>
-            </div>
-          </div>
+          <div class="row-wrapper bt-gray" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md = "column">
+            <div fxFlex="50%" fxLayout="column" fxLayoutAlign="start stretch" class="pr-4 py-2" [ngClass.lg] = "{'br-gray':true}" [ngClass.lt-lg] = "{'px-3':true}">
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Expected Salary</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  3700
+                </p>
+              </div>
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Follow Up Date</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  /
+              </div>
 
-          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
-            <div fxFlex="50">
-              <i class="fa fa-usd fa-normal-size" aria-hidden="true"></i>
-              <p>{{selectedApplicant.email}}</p>
             </div>
-            <div fxFlex="50">
-              <mat-icon>phone</mat-icon>
-              <p>{{selectedApplicant.mobile}}</p>
-            </div>
-          </div>
-
-          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
-            <div fxFlex="50">
-              <mat-icon>email</mat-icon>
-              <p>{{selectedApplicant.email}}</p>
-            </div>
-            <div fxFlex="50">
-              <mat-icon>phone</mat-icon>
-              <p>{{selectedApplicant.mobile}}</p>
-            </div>
-          </div>
-
-          <div class="row-wrapper" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
-            <div fxFlex="50">
-              <mat-icon>email</mat-icon>
-              <p>{{selectedApplicant.email}}</p>
-            </div>
-            <div fxFlex="50">
-              <mat-icon>phone</mat-icon>
-              <p>{{selectedApplicant.mobile}}</p>
+            <div fxFlex="50%" class="py-2 pr-4" fxLayout="column" fxLayoutAlign="start stretch" [ngClass.lt-lg] = "{'bt-gray px-3':true}" [ngClass.lg] = "{'pl-4':true}">
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Rejection Reason</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  /
+              </div>
+              <div fxLayout="row" class = "py-2">
+                <p fxFlex="40%">Remark</p>
+                <span fxFlex="5%">:</span>
+                <p fxFlex="50%">
+                  /
+              </div>
             </div>
           </div>
         </div>
-
-
       </mat-card-content>
 
     </mat-card>
   </div>
 
-  <button mat-fab style="position:fixed; bottom:30px; right:30px" (click)="toggleFilter()" [ngClass]="{'rotate-down':showFilter, 'rotate-up':!showFilter}">
+  <!-- <button mat-fab style="position:fixed; bottom:30px; right:30px" (click)="toggleFilter()" [ngClass]="{'rotate-down':showFilter, 'rotate-up':!showFilter}">
     <i class="fa fa-filter fa-normal-size" aria-hidden="true" [ngClass]="{'fade-out':showFilter}" [hidden]="showFilter"></i>
     <mat-icon [ngClass]="{'fade-in':!showFilter}" [hidden]="!showFilter">close</mat-icon>
-  </button>
+  </button> -->
 </div>
