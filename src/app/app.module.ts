@@ -14,7 +14,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
 import { LandingComponent } from "./landing/landing.component";
 import { AngularFireModule } from "angularfire2";
-import { UserService, AuthGuard } from "@app/services";
+import { UserService, AuthGuard, SideNavService } from "@app/services";
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { ApplicantsComponent } from './applicants/applicants.component';
 import { ShowAuthedDirective } from './shared/show-authed.directive';
@@ -35,7 +35,7 @@ import { ShowAuthedDirective } from './shared/show-authed.directive';
     LoginModule,
     CoreComponentModule
   ],
-  providers: [UserService, AuthGuard, ShowAuthedDirective],
+  providers: [UserService, AuthGuard, ShowAuthedDirective, SideNavService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

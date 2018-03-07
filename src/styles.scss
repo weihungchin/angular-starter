@@ -56,3 +56,18 @@ button:focus {
   border-top:1px solid $dividerGray;
 }
 
+.img-circle {
+  border-radius: 50%;
+}
+
+.crop{
+  width:140px;
+  height:140px;
+  overflow:hidden;
+
+  & img{
+    width: 140px;
+    height:140px;
+    margin: 0 0 -90px 0;
+  }
+}

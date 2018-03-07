@@ -1,78 +1,71 @@
 <div class="container-wrapper">
 
-  <div class="side-card-container mr-2">
-    <mat-tab-group class="side-card-wrapper">
-      <mat-tab label="Pending (12)">
-        <div class="side-card-wrapper" style="cursor:pointer">
+
+  <div class="side-card-container">
+    <div class="custom-side-toolbar">
+      <button mat-icon-button (click)="toggleSideNav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <mat-tab-group>
+      <mat-tab label="Pending (12)" class="side-card-wrapper">
+        <!-- <ng-template mat-tab-label>
+          <mat-icon>security</mat-icon> (112)
+        </ng-template> -->
+
+
+        <div class="side-card-wrapper" style="cursor:pointer;">
           <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
-          <mat-card *ngFor="let person of applicantsData" (click)="onClickSideCard(person)" [ngClass] = "{'side-card-selected':person.selected, 'side-card':!person.selected}">
+          <mat-card *ngFor="let person of applicantsData" (click)="onClickSideCard(person)" [ngClass]="{'side-card-selected':person.selected, 'side-card':!person.selected}">
 
             <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
-              <div fxFlex="20%" fxFlexAlign="center">
-                <img mat-card-avatar src="../../assets/images/circle-person.png" alt="Avatar Photo">
+              <div fxFlex="15%" fxFlexAlign="center">
+                <img mat-card-avatar src="../../assets/images/generic-w-90.jpg" alt="Avatar Photo">
               </div>
               <div fxFlex="50%" fxFlexAlign="stretch">
                 <h6> {{person.name}}</h6>
                 <div fxLayout fxLayoutAlign="start start" class="mt-1">
-                  <mat-icon class = "text-gray side-card-tex"  fxFlex="15%">work</mat-icon> &nbsp;
-                  <div class = "text-gray side-card-text" fxFlex>UI / UX</div>
+                  <mat-icon class="text-gray side-card-icon" fxFlex="15%">person</mat-icon> &nbsp;
+                  <div class="text-gray side-card-text" fxFlex>UI / UX</div>
                 </div>
                 <div fxLayout fxLayoutAlign="start start">
-                  <mat-icon class="text-gray" fxFlex="15%">date_range</mat-icon> &nbsp;
-                  <div class="text-gray " fxFlex>22/02/2018</div>
+                  <mat-icon class="text-gray side-card-icon" fxFlex="15%">date_range</mat-icon> &nbsp;
+                  <div class="text-gray side-card-text" fxFlex>22/02/2018</div>
                 </div>
               </div>
 
               <div class="spacer"></div>
 
-              <div fxFlex fxFlexAlign="center">
-                Pending
+              <div fxFlex="30%" fxFlexAlign="center" fxLayout fxLayoutAlign="space-around" fxLayoutGap="10px">
+                <div class="scard-stat" fxFlexAlign="center" [ngClass]="getStatusClass('bullet', person.statusCode)"></div>
+                <div fxFlex fxFlexAlign="center" [ngClass]="getStatusClass('text', person.statusCode)">{{person.statusDesc}}</div>
               </div>
             </div>
           </mat-card>
         </div>
+
+
       </mat-tab>
       <mat-tab label="Accepted (54)">
+
         <div class="side-card-wrapper" style="cursor:pointer">
           <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
-          <mat-card class="side-card mb-2" *ngFor="let person of applicantsData" (click)="onClickSideCard(person)">
+          <mat-card *ngFor="let person of applicantsData" (click)="onClickSideCard(person)" [ngClass]="{'side-card-selected':person.selected, 'side-card':!person.selected}">
 
             <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
               <div fxFlex="20%" fxFlexAlign="center">
-                <img mat-card-avatar src="../../assets/images/circle-person.png" alt="Avatar Photo">
+                <img mat-card-avatar src="../../assets/images/generic-w-90.jpg" alt="Avatar Photo">
               </div>
               <div fxFlex="50%" fxFlexAlign="stretch">
-                <h5> {{person.name}}</h5>
-                <mat-icon class="mr-3 mt-2 float-left" style="vertical-align:middle">work</mat-icon> &nbsp;
-                <div class="float-left mt-2" style="vertical-align:middle">{{person.mobile}}</div>
-                <mat-icon class="mr-3 mt-2 float-left text-gray" style="vertical-align:middle">date_range</mat-icon> &nbsp;
-                <div class="text-gray mt-2 float-left" style="vertical-align:middle">{{person.mobile}}</div>
-              </div>
-
-              <div class="spacer"></div>
-
-              <div fxFlex fxFlexAlign="center">
-                Rejected
-              </div>
-            </div>
-          </mat-card>
-        </div>
-      </mat-tab>
-      <mat-tab label="Rejected (46)">
-        <div class="side-card-wrapper" style="cursor:pointer">
-          <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
-          <mat-card class="side-card mb-2" *ngFor="let person of applicantsData" (click)="onClickSideCard(person)">
-
-            <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
-              <div fxFlex="20%" fxFlexAlign="center">
-                <img mat-card-avatar src="../../assets/images/circle-person.png" alt="Avatar Photo">
-              </div>
-              <div fxFlex="50%" fxFlexAlign="stretch">
-                <h5> {{person.name}}</h5>
-                <mat-icon class="mr-3 mt-2 float-left" style="vertical-align:middle">work</mat-icon> &nbsp;
-                <div class="float-left mt-2" style="vertical-align:middle">{{person.mobile}}</div>
-                <mat-icon class="mr-3 mt-2 float-left text-gray" style="vertical-align:middle">date_range</mat-icon> &nbsp;
-                <div class="text-gray mt-2 float-left" style="vertical-align:middle">{{person.mobile}}</div>
+                <h6> {{person.name}}</h6>
+                <div fxLayout fxLayoutAlign="start start" class="mt-1">
+                  <mat-icon class="text-gray side-card-icon" fxFlex="15%">person</mat-icon> &nbsp;
+                  <div class="text-gray side-card-text" fxFlex>UI / UX</div>
+                </div>
+                <div fxLayout fxLayoutAlign="start start">
+                  <mat-icon class="text-gray side-card-icon" fxFlex="15%">date_range</mat-icon> &nbsp;
+                  <div class="text-gray side-card-text" fxFlex>22/02/2018</div>
+                </div>
               </div>
 
               <div class="spacer"></div>
@@ -84,34 +77,69 @@
           </mat-card>
         </div>
       </mat-tab>
+      <mat-tab label="Rejected (46)">
+
+        <div class="side-card-wrapper" style="cursor:pointer">
+          <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
+          <mat-card *ngFor="let person of applicantsData" (click)="onClickSideCard(person)" [ngClass]="{'side-card-selected':person.selected, 'side-card':!person.selected}">
+
+            <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
+              <div fxFlex="20%" fxFlexAlign="center">
+                <img mat-card-avatar src="../../assets/images/generic-w-90.jpg" alt="Avatar Photo">
+              </div>
+              <div fxFlex="50%" fxFlexAlign="stretch">
+                <h6> {{person.name}}</h6>
+                <div fxLayout fxLayoutAlign="start start" class="mt-1">
+                  <mat-icon class="text-gray side-card-icon" fxFlex="15%">person</mat-icon> &nbsp;
+                  <div class="text-gray side-card-text" fxFlex>UI / UX</div>
+                </div>
+                <div fxLayout fxLayoutAlign="start start">
+                  <mat-icon class="text-gray side-card-icon" fxFlex="15%">date_range</mat-icon> &nbsp;
+                  <div class="text-gray side-card-text" fxFlex>22/02/2018</div>
+                </div>
+              </div>
+
+              <div class="spacer"></div>
+
+              <div fxFlex fxFlexAlign="center">
+                Rejected
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </mat-tab>
     </mat-tab-group>
   </div>
 
-  <div class="main-card-container mr-1">
+
+
+
+  <div class="main-card-container" fxHide.lt-md fxShow>
 
     <app-filter [hidden]="!showFilter"></app-filter>
 
-    <mat-card class="main-card p-0" *ngIf="!showFilter" [ngClass]="{'flip-out-y': showFilter}">
 
-      <div class="main-card-header" fxLayout fxLayoutAlign="start stretch" fxLayoutGap="20px" fxLayout.md="column" fxLayout.sm="column"
+    <mat-card class="main-card p-0" *ngIf="!showFilter" [ngClass]="{'flip-out-y': showFilter}">
+      <div class="custom-toolbar"></div>
+      <div class="main-card-header" fxLayout fxLayoutAlign="start stretch"  fxLayout.md="column" fxLayout.sm="column"
         fxLayout.xs="column">
-        <div fxFlex="30%" fxFlexAlign="center" class="mr-3" fxFlex.md="100%" fxFlex.sm="100%">
-          <img class="main-avatar" src="../../assets/images/circle-person-300.png" alt="Avatar Photo">
+        <div fxFlex="20%" fxFlexAlign="center" class="mr-3" fxFlex.md="100%" fxFlex.sm="100%">
+          <img class="main-avatar img-circle" src="../../assets/images/generic-w-180.jpg" alt="Avatar Photo">
         </div>
         <div fxFlex="35%" fxFlexAlign="center" class="mt-2">
           <h5>
             <b>{{selectedApplicant.name}}</b>
           </h5>
           <div fxLayout fxLayoutAlign="start start" class="mt-3 main-card-text">
-            <mat-icon fxFlex="15%" fxFlex.md="20%" fxFlex.lg="7%" class = "mr-2">phone</mat-icon> &nbsp;
+            <mat-icon fxFlex="15%" fxFlex.md="20%" fxFlex.lg="7%" class="mr-2">phone</mat-icon> &nbsp;
             <div fxFlex>{{selectedApplicant.mobile}}</div>
           </div>
           <div fxLayout fxLayoutAlign="start start" class="mt-3 main-card-text">
-            <mat-icon fxFlex="15%"  fxFlex.md="20%" fxFlex.lg="7%" class = "mr-2">email</mat-icon> &nbsp;
+            <mat-icon fxFlex="15%" fxFlex.md="20%" fxFlex.lg="7%" class="mr-2">email</mat-icon> &nbsp;
             <div fxFlex>{{selectedApplicant.email}}</div>
           </div>
           <div fxLayout fxLayoutAlign="start start" class="mt-3 main-card-text">
-            <mat-icon fxFlex="15%" fxFlex.md="20%" fxFlex.lg="7%" class = "mr-2">language</mat-icon> &nbsp;
+            <mat-icon fxFlex="15%" fxFlex.md="20%" fxFlex.lg="7%" class="mr-2">language</mat-icon> &nbsp;
             <div fxFlex>Malaysian</div>
           </div>
         </div>
@@ -142,84 +170,87 @@
 
         <div class="content-wrapper">
 
-          <div class="row-wrapper bt-gray" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md = "column" >
-            <div fxFlex="50%" fxLayout="column" fxLayoutAlign="start stretch" class="pr-4 py-2" [ngClass.lg] = "{'br-gray':true}" [ngClass.lt-lg] = "{'px-3':true}">
-              <div fxLayout="row" class = "py-2">
+          <div class="row-wrapper bt-gray" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column">
+            <div fxFlex="50%" fxLayout="column" fxLayoutAlign="start stretch" class="py-2" [ngClass.lg]="{'br-gray px-4':true}" [ngClass.lt-lg]="{'px-5':true}">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Primary Skills</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   UI / UX
                 </p>
               </div>
-              <div fxLayout="row" class = "py-2">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Secondary Skills</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, assumenda eaque consequuntur ratione
               </div>
 
-              <div fxLayout="row" class = "py-2">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Years of Experience</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   2
               </div>
             </div>
-            <div fxFlex="50%" class="py-2 pr-4" fxLayout="column" fxLayoutAlign="start stretch" [ngClass.lt-lg] = "{'bt-gray px-3':true}" [ngClass.lg] = "{'pl-4':true}" >
-              <div fxLayout="row" class = "py-2">
+            <div fxFlex="50%" class="py-2 pr-4" fxLayout="column" fxLayoutAlign="start stretch" [ngClass.lt-lg]="{'bt-gray px-5':true}"
+              [ngClass.lg]="{'pl-4':true}">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Channel</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   Agent
               </div>
-              <div fxLayout="row" class = "py-2">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Recruiter</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   Tan Meng Meng
               </div>
             </div>
-          
+
           </div>
 
-          <div class="row-wrapper bt-gray" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md = "column" >
-            <div fxFlex="50%" fxLayout="column" fxLayoutAlign="start stretch" class="pr-4 py-2" [ngClass.lg] = "{'br-gray':true}" [ngClass.lt-lg] = "{'px-3':true}">
-              <div fxLayout="row" class = "py-2">
+          <div class="row-wrapper bt-gray" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column">
+            <div fxFlex="50%" fxLayout="column" fxLayoutAlign="start stretch" class="pr-4 py-2" [ngClass.lg]="{'br-gray px-4':true}"
+              [ngClass.lt-lg]="{'px-5':true}" [ngClass.gt-lg]="{'pr-4':true}">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Company</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   Maxis
                 </p>
               </div>
-              <div fxLayout="row" class = "py-2">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Remuneration</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   Lorem, ipsum dol
               </div>
 
-              <div fxLayout="row" class = "py-2">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Benefits</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   /
               </div>
 
-              <div fxLayout="row" class = "py-2">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Reason for Leaving</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   Explore new opportunity
               </div>
             </div>
-            <div fxFlex="50%" class="py-2 pr-4" fxLayout="column" fxLayoutAlign="start stretch" [ngClass.lt-lg] = "{'bt-gray px-3':true}" [ngClass.lg] = "{'pl-4':true}">
-              <div fxLayout="row" class = "py-2">
+            <div fxFlex="50%" class="py-2 pr-4" fxLayout="column" fxLayoutAlign="start stretch" [ngClass.lt-lg]="{'bt-gray px-5':true}"
+              [ngClass.lg]="{'pl-4':true}">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">University</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   London School of Design and Marketing
               </div>
-              <div fxLayout="row" class = "py-2">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Studies</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
@@ -229,16 +260,17 @@
           </div>
 
 
-          <div class="row-wrapper bt-gray" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md = "column">
-            <div fxFlex="50%" fxLayout="column" fxLayoutAlign="start stretch" class="pr-4 py-2" [ngClass.lg] = "{'br-gray':true}" [ngClass.lt-lg] = "{'px-3':true}">
-              <div fxLayout="row" class = "py-2">
+          <div class="row-wrapper bt-gray" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column">
+            <div fxFlex="50%" fxLayout="column" fxLayoutAlign="start stretch" class="pr-4 py-2" [ngClass.lg]="{'px-4':true}" [ngClass.lt-lg]="{'px-5':true}"
+              [ngClass.gt-lg]="{'pr-4':true}">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Expected Salary</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   3700
                 </p>
               </div>
-              <div fxLayout="row" class = "py-2">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Follow Up Date</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
@@ -246,14 +278,14 @@
               </div>
 
             </div>
-            <div fxFlex="50%" class="py-2 pr-4" fxLayout="column" fxLayoutAlign="start stretch" [ngClass.lt-lg] = "{'bt-gray px-3':true}" [ngClass.lg] = "{'pl-4':true}">
-              <div fxLayout="row" class = "py-2">
+            <div fxFlex="50%" class="py-2 pr-4" fxLayout="column" fxLayoutAlign="start stretch" [ngClass.lt-lg]="{'px-5':true}" [ngClass.lg]="{'pl-4':true}">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Rejection Reason</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">
                   /
               </div>
-              <div fxLayout="row" class = "py-2">
+              <div fxLayout="row" class="py-2">
                 <p fxFlex="40%">Remark</p>
                 <span fxFlex="5%">:</span>
                 <p fxFlex="50%">

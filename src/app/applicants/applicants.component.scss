@@ -1,9 +1,38 @@
-$headerHeight:65px;
+$headerHeight:64px;
 $grayText:rgba(92, 88, 88, 0.7);
-$mainCardFS:14px;
+$mainCardFS:0.9rem;
+$iconFS:20px;
+$statusScheduled:rgba(0, 183, 255, 0.904);
+$leftHeaderZI:2;
+$rightHeaderZI:3;
+$tabOffset:30px;
+
+.custom-side-toolbar{
+  height:$headerHeight;
+  width:100%;
+  position:fixed;
+  top:0;
+  z-index:$leftHeaderZI;
+  display: block;
+  background:rgba(105, 221, 202, 0.959);
+
+  &+mat-tab-group{
+    padding-top:$headerHeight;
+    display: block;
+    max-height:100%;
+    min-width: 300px;
+  }
+}
 
 .main-card-header{
-  padding:70px 120px 30px 120px;
+  padding:134px 120px 30px 120px; //70px 120px 30px 120px
+}
+
+@media(max-width:1420px){
+  .main-card-header{
+    padding:134px 10px 30px 40px;
+  }
+  
 }
 
 .main-card-text>mat-icon, .main-card-text>div{
@@ -14,8 +43,8 @@ $mainCardFS:14px;
 .main-card-text>div, .main-card-label {
   font-size:$mainCardFS;
 }
-.main-card-text>mat-icon{
-  font-size:18px;
+.main-card-text>mat-icon, .side-card-icon{
+  font-size:$iconFS;
 }
 .side-card-text{
   font-size:$mainCardFS;
@@ -26,11 +55,19 @@ $mainCardFS:14px;
   color:rgba(0, 183, 255, 0.904) !important;
 }
 
+:host /deep/ .mat-tab-body-wrapper, mat-tab-group{
+  height:calc(100% - #{$tabOffset});
+}
+
+mat-card{
+  margin-bottom:0
+}
 
 .main-avatar {
   display:block; 
   width:140px;
-  height:140px
+  height:140px;
+  //margin:auto;
 }
 
 .container-wrapper {
@@ -41,6 +78,19 @@ $mainCardFS:14px;
 }
 .main-card-container, .main-card{
   min-height: 100%;
+}
+
+// .main-card{
+//   margin-top:$headerHeight;
+// }
+
+.custom-toolbar{
+  height:$headerHeight;
+  background:rgb(4, 68, 93);
+  top:0;
+  position:fixed;
+  width:100%;
+  z-index:$rightHeaderZI;
 }
 
 .row-wrapper{
@@ -56,27 +106,31 @@ $mainCardFS:14px;
 
 @media(min-width:1580px){
   .row-wrapper{
-    padding:0 120px;
+    padding:0 120px 0 100px;
   }
 }
 
 .side-card-container {
-  flex: 1 2 200px;
- 
+  flex: 1 1 auto;
+  max-width: 100%;
 }
 
 .side-card-wrapper {
   display: block;
   max-height:100%;
   overflow: auto;
-  min-width: 400px;
+  min-width: 300px;
   min-height: 500px;
+
+  &>mat-card{
+    padding:18px 24px;
+  }
  
 }
 
 .main-card-container {
-  flex: 4 1 500px;
-  max-height:99%;
+  // flex: 4 1 500px;
+  max-height:100%;
   overflow:auto;
  
 }
@@ -105,11 +159,37 @@ $mainCardFS:14px;
   }
   &::after{
     border-radius: 0;
-    border-width: 10px;
-    border-right-color: rgb(14, 173, 139);
-    border-bottom-color: rgb(14, 173, 139);
+    border-width: 15px;
+    border-right-color: #7CCCBF;
+    border-bottom-color: #7CCCBF;
   }
 }
+
+
+$status: (
+   scheduled: #00AEEF,
+   onhold: #F7941D,
+   shortlisted: #39B54A,
+);
+.scard-stat{
+  width: 10px;
+	height: 10px;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+  border-radius: 5px;
+  
+  @each $name, $color in $status{
+    &--#{$name}{
+      background:$color;
+    }
+  }
+}
+@each $name, $color in $status{
+  .stat-text--#{$name}{
+    color:$color !important;
+  }
+}
+
 
 
 

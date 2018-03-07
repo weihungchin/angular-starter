@@ -2,6 +2,18 @@ mat-toolbar {
   justify-content: space-between;
 }
 
+// .toolbar:before{
+//   content: "";
+//   position: absolute;
+//   z-index: 0;
+//   top: 0;
+//   right: 70%;
+//   bottom: 0;
+//   left: 0;
+//   background: red;
+//   height:64px;
+// }
+
 .toolbar-spacer{
   flex:1 1 auto;
   -ms-flex:1 1 auto;
@@ -37,3 +49,19 @@ mat-nav-list {
     //padding:20px 20px;
     height:100%;
 }
+
+mat-list-item{
+  border-bottom:1px solid #cdcdcd;
+  cursor:pointer;
+  color:#fff;
+
+  &>mat-icon{
+    margin-right:10px;
+  }
+  &:first-child{
+    border-top:1px solid #cdcdcd;
+  }
+}
+
+
+

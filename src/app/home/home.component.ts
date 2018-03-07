@@ -1,6 +1,7 @@
-import { MatTableDataSource, MatSelectChange } from "@angular/material";
+import { SideNavService } from './../services/side-nav.service';
+import { MatTableDataSource, MatSelectChange, MatSidenav } from "@angular/material";
 import { UserService } from "./../services/user.service";
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from "@angular/core";
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
 import { AngularFireDatabase } from "angularfire2/database";
 import {
@@ -41,20 +42,26 @@ export class HomeComponent implements OnInit, OnDestroy {
   ];
   mobSelectedSort: any;
 
+  @ViewChild('snav')
+  snav:MatSidenav;
+
   constructor(
     private cdRef: ChangeDetectorRef,
     private mediaMatcher: MediaMatcher,
     private ngFireDB: AngularFireDatabase,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private sideNavService:SideNavService
   ) {
     this.mobQuery = mediaMatcher.matchMedia("(max-width: 760px)");
+    console.log(this.mobQuery);
     this.mobQueryListener = () => cdRef.detectChanges();
     this.mobQuery.addListener(this.mobQueryListener);
   }
 
   ngOnInit() {
     this.getApplicants(this.applicantsPath);
+    this.subscToToggleAction();
   }
 
   logout() {
@@ -115,5 +122,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
     this.mobApplicantsData.filteredData = [...sortedData];
     console.log(sortedData);
+  }
+
+  private subscToToggleAction(){
+    this.sideNavService.isToggle.subscribe(
+      () => {
+        this.snav.toggle();
+      }
+    )
   }
 }

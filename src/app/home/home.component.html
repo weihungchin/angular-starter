@@ -1,4 +1,4 @@
-<div>
+<!-- <div style = "height:64px" class = "toolbar">
   <mat-toolbar color="primary">
     <span>
       <button mat-icon-button (click)="snav.toggle()">
@@ -11,13 +11,13 @@
 
     <span class="toolbar-spacer"></span>
     <button mat-icon-button>
-      <mat-icon>notifications</mat-icon>
+      <mat-icon>notifications_none</mat-icon>
     </button>
     <button mat-icon-button [mat-menu-trigger-for]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
-  </mat-toolbar>
-  <mat-menu x-position="before" #menu="matMenu">
+  </mat-toolbar> 
+   <mat-menu x-position="before" #menu="matMenu">
     <button mat-menu-item (click)="logout()">
       <mat-icon>exit_to_app</mat-icon> Logout</button>
   </mat-menu>
@@ -25,8 +25,6 @@
   <mat-sidenav-container class="snav-container" [style.marginTop.px]="mobQuery.matches ? 56 : 64">
     <mat-sidenav #snav [mode]="mobQuery.matches? 'over':'side'" opened="false">
       <mat-nav-list>
-        
-
         <button mat-menu-item style = "color:#fff">
           <mat-icon style = "color:#fff">assignment_ind
           </mat-icon>Dashboard</button>
@@ -36,99 +34,28 @@
     <mat-sidenav-content>
       <div class="sidenav-container">
         <router-outlet></router-outlet>
-        
-        <!-- <mat-tab-group *ngIf="!mobQuery.matches">
-          <mat-tab label="New">
-            <app-common-table [data]="applicantsData" [isLoading]="isLoading"></app-common-table>
-          </mat-tab>
-          <mat-tab label="Accepted">
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis
-              vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur
-              felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim
-              rutrum enim, vel tempor sapien arcu a tellus.
-            </div>
-          </mat-tab>
-          <mat-tab label="Rejected">
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis
-              vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur
-              felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim
-              rutrum enim, vel tempor sapien arcu a tellus.
-            </div>
-          </mat-tab>
-
-          <mat-tab label="All">
-          </mat-tab>
-        </mat-tab-group>
-
-        <div *ngIf="mobQuery.matches">
-          
-
-          <div class="row mb-4 mt-3">
-            <div class="col-sm-8">
-              <mat-form-field class="w-100">
-                <input matInput (keyup)="mobApplyFilter($event.target.value)" placeholder="Search">
-                <mat-icon matSuffix class="gray-icon">search</mat-icon>
-              </mat-form-field>
-            </div>
-
-            <div class="col-sm-4">
-              <mat-form-field class="w-100">
-                <mat-select placeholder="Sort By" (selectionChange)="onMobSort($event)">
-                  <mat-option *ngFor="let item of sortCriteria" [value]="item.key">
-                    {{ item.value }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-
-        
-          <mat-spinner class = "spinner-container" *ngIf = "isLoading"></mat-spinner>
-           
-
-
-       
-          <ng-container *ngFor="let item of mobApplicantsData.filteredData" class="mt-5">
-
-            <mat-card>
-               
-                    <mat-panel-title>
-                      {{item.name }}
-                    </mat-panel-title>
-                 
-                  <mat-panel-description class="mb-2" style = "display:block">
-                    <mat-icon class="mr-3 mt-2 float-left" style = "vertical-align:middle">phone</mat-icon> &nbsp;
-                    <div class = "float-left mt-2" style = "vertical-align:middle">{{item.mobile}}</div>
-                  </mat-panel-description>
-                  <mat-panel-description style = "display:block">
-                    <mat-icon class="mr-3 mt-2 float-left" style = "vertical-align:middle">email</mat-icon> &nbsp;
-                    <div class = "float-left mt-2" style = "vertical-align:middle">{{item.email}}</div>
-                    <span style="flex:1 1 auto"></span>
-                    <button mat-icon-button style="margin-top:-10px" class = "float-right">
-                      <mat-icon>file_download</mat-icon>
-                    </button>
-                  </mat-panel-description>
-            </mat-card>
-
-
-          </ng-container> 
-
-          <button mat-fab color="accent" style="position:fixed; bottom:30px; right:30px">
-            <mat-icon>add</mat-icon>
-          </button>
-
-        </div>-->
-
-
-
       </div>
-      <!--end of sidenav content-->
-
-
-
     </mat-sidenav-content>
   </mat-sidenav-container>
+</div> -->
 
+
+<div class="snav-container">
+
+  <mat-sidenav-container class="snav-container">
+    <mat-sidenav #snav [mode]="mobQuery.matches? 'over':'side'" opened="false">
+      <mat-nav-list style="padding-top:80px">
+      
+        <mat-list-item style = "color:#fff">
+              <mat-icon style = "color:#fff; margin-right:10px">assignment_ind
+              </mat-icon>Dashboard
+          </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="sidenav-container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
