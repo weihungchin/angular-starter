@@ -1,3 +1,5 @@
+@import "../../assets/scss/color-map.scss";
+
 $headerHeight:64px;
 $grayText:rgba(92, 88, 88, 0.7);
 $mainCardFS:0.9rem;
@@ -14,7 +16,7 @@ $tabOffset:30px;
   top:0;
   z-index:$leftHeaderZI;
   display: block;
-  background:rgba(105, 221, 202, 0.959);
+  background:map-get($color-map, "primary-green");
 
   &+mat-tab-group{
     padding-top:$headerHeight;
@@ -59,6 +61,19 @@ $tabOffset:30px;
   height:calc(100% - #{$tabOffset});
 }
 
+:host /deep/ .mat-tab-label-active{
+  color:map-get($map: $color-map, $key: "accent-primary") !important;
+  font-weight:bold;
+}
+
+:host /deep/ .mat-tab-labels{
+  justify-content:space-around;
+}
+
+:host /deep/ .mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus,.mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus{
+  background-color:transparent;
+}
+
 mat-card{
   margin-bottom:0
 }
@@ -86,7 +101,7 @@ mat-card{
 
 .custom-toolbar{
   height:$headerHeight;
-  background:rgb(4, 68, 93);
+  background:map-get($map: $color-map, $key: "secondary-green");
   top:0;
   position:fixed;
   width:100%;
@@ -111,8 +126,8 @@ mat-card{
 }
 
 .side-card-container {
-  flex: 1 1 auto;
-  max-width: 100%;
+  flex: 1 1 500px;
+  max-width: 100%
 }
 
 .side-card-wrapper {
@@ -129,21 +144,25 @@ mat-card{
 }
 
 .main-card-container {
-  // flex: 4 1 500px;
+  flex: 4 1 auto;
   max-height:100%;
   overflow:auto;
  
 }
 
 .side-card{
-  border-top:1px solid rgba(0,0,0,0.1);
-  border-bottom:1px solid rgba(0,0,0, 0.1);
+  border-top:1px solid map-get($color-map, "divider-gray");
+  border-bottom:1px solid map-get($color-map, "divider-gray");
   box-shadow:none !important;
-  background-color:rgba(0,0,0,0.05);
+  background-color:map-get($color-map, "background-gray");
 
   &:hover{
      background-color: #FFF;
   }
+}
+
+.tab-active{
+  color:map-get($map: $color-map, $key: "accent-primary") !important;
 }
 
 .side-card-selected{
@@ -156,12 +175,14 @@ mat-card{
     right: 0;
     border-color: transparent;
     border-style: solid;
+    z-index:10;
   }
   &::after{
     border-radius: 0;
-    border-width: 15px;
-    border-right-color: #7CCCBF;
-    border-bottom-color: #7CCCBF;
+    border-width: 12px;
+    border-right-color: map-get($color-map, "accent-light");
+    border-bottom-color:map-get($color-map, "accent-light");
+    z-index:10;
   }
 }
 
@@ -193,99 +214,6 @@ $status: (
 
 
 
-
-@keyframes rotateInDownLeft {
-  from {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-
-  to {
-    transform: rotate3d(0, 0, 1, 90deg);
-    opacity: 1;
-  }
-}
-
-.rotate-down {
-  animation: 0.5s 0s rotateInDownLeft;
-  animation-fill-mode: forwards;
-}
-
-@keyframes rotateInUpRight {
-  from {
-    transform: rotate3d(0, 0, 1, 90deg);
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.rotate-up {
-  animation: 0.5s 0s rotateInUpRight;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    display: inherit;
-  }
-
-  to {
-    opacity: 0;
-    display: none;
-  }
-}
-
-.fade-out {
-  animation: 2s 0s fadeOut;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.fade-in {
-  animation: 2s 0s fadeIn;
-  animation-fill-mode: forwards;
-}
-
-@keyframes rotate45CW {
-  from {
-    transform: rotate3d(0, 0, 0);
-  }
-  to {
-    transform: rotate3d(0, 0, 1, 45deg);
-  }
-}
-
-@keyframes rotate45ACW {
-  from {
-    transform: rotate3d(0, 0, 1, 45deg);
-  }
-  to {
-    transform: rotate3d(0, 0, 0);
-  }
-}
-
-.rotate-45-cw {
-  animation: 0.2s 0s rotate45CW;
-  animation-fill-mode: forwards;
-}
-
-.rotate-45-acw {
-  animation: 0.2s 0s rotate45ACW;
-  animation-fill-mode: forwards;
-}
-
 mat-list-item:hover {
   background-color: rgba(0, 0, 0, 0.12);
   cursor: pointer;
@@ -301,58 +229,3 @@ mat-list-item:hover {
   }
 }
 
-
-@keyframes flipOutY {
-  from {
-    transform: perspective(400px);
-  }
-
-  30% {
-    transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
-    opacity: 1;
-  }
-
-  to {
-    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
-    opacity: 0;
-  }
-}
-
-.flip-out-y {
-  animation-duration: 0.75s;
-  backface-visibility: visible !important;
-  animation-name: flipOutY;
-  animation-fill-mode: forwards;
-}
-
-@keyframes flipInY {
-  from {
-    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
-    animation-timing-function: ease-in;
-    opacity: 0;
-  }
-
-  40% {
-    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
-    animation-timing-function: ease-in;
-  }
-
-  60% {
-    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
-    opacity: 1;
-  }
-
-  80% {
-    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
-  }
-
-  to {
-    transform: perspective(400px);
-  }
-}
-
-.flip-in-y {
-  backface-visibility: visible !important;
-  animation-name: flipInY;
-  animation-fill-mode: forwards;
-}

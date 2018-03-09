@@ -1,3 +1,4 @@
+import { MatCustomIconService } from '@app/services';
 import { SideNavService } from './../services/side-nav.service';
 import { MatTableDataSource, MatSelectChange, MatSidenav } from "@angular/material";
 import { UserService } from "./../services/user.service";
@@ -51,7 +52,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private ngFireDB: AngularFireDatabase,
     private userService: UserService,
     private router: Router,
-    private sideNavService:SideNavService
+    private sideNavService:SideNavService,
+    private customIconService:MatCustomIconService
   ) {
     this.mobQuery = mediaMatcher.matchMedia("(max-width: 760px)");
     console.log(this.mobQuery);
@@ -62,6 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getApplicants(this.applicantsPath);
     this.subscToToggleAction();
+    this.customIconService.init();
   }
 
   logout() {

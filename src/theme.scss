@@ -1,19 +1,152 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$my-app-primary: mat-palette($mat-light-blue, 600);
-$my-app-accent:  mat-palette($mat-red, 600, 900, A100);
+
+
+// $my-app-primary: mat-palette($mat-light-blue, 600);
+// $my-app-accent:  mat-palette($mat-red, 600, 900, A100);
+// $my-app-warn:    mat-palette($mat-red, A700); // optional rgb(218, 71, 74)
+
+// $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+// $dark-primary: mat-palette($mat-blue-grey, 900);
+// $dark-accent: mat-palette($mat-light-blue, A200);
+// $dark-warn: mat-palette($mat-pink, A400);
+// $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+// .alt-dark-theme{
+//     @include angular-material-theme($dark-theme);
+// }
+
+// @include angular-material-theme($my-app-theme);
+
+
+
+/* custom pallette generated from http://mcg.mbitson.com based on the primary color code provided by UI/UX team*/
+/* For use in src/lib/core/theming/_palette.scss */
+$mat-custom-green: (
+    50 : #eff9f7,
+    100 : #d8f0ec,
+    200 : #bee6df,
+    300 : #a3dbd2,
+    400 : #90d4c9,
+    500 : #7cccbf,
+    600 : #74c7b9,
+    700 : #69c0b1,
+    800 : #5fb9a9,
+    900 : #4cad9b,
+    A100 : #ffffff,
+    A200 : #d7fff7,
+    A400 : #a4ffed,
+    A700 : #8bffe8,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$mat-custom-second-green: (
+    50 : #e0f5f3,
+    100 : #b3e5e2,
+    200 : #80d4ce,
+    300 : #4dc3ba,
+    400 : #26b6ac,
+    500 : #00a99d,
+    600 : #00a295,
+    700 : #00988b,
+    800 : #008f81,
+    900 : #007e6f,
+    A100 : #acfff3,
+    A200 : #79ffec,
+    A400 : #46ffe5,
+    A700 : #2cffe1,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$app-tab-primary: (
+    50 : #e0f5f3,
+    100 : #b3e5e2,
+    200 : #80d4ce,
+    300 : #4dc3ba,
+    400 : #26b6ac,
+    500 : #00a99d,
+    600 : #00a295,
+    700 : #00988b,
+    800 : #008f81,
+    900 : #007e6f,
+    A100 : #acfff3,
+    A200 : #79ffec,
+    A400 : #46ffe5,
+    A700 : #2cffe1,
+    contrast: (
+        50 : #00a99d,
+        100 : #00a99d,
+        200 : #00a99d,
+        300 : #00a99d,
+        400 : #00a99d,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #00a99d,
+        A200 : #00a99d,
+        A400 : #00a99d,
+        A700 : #00a99d,
+    )
+);
+
+
+
+$my-app-primary: mat-palette($mat-custom-green, 500);
+$my-app-accent:  mat-palette($mat-custom-second-green, 500, 900, A100); //color name, default value, lighter value, darker value
 $my-app-warn:    mat-palette($mat-red, A700); // optional rgb(218, 71, 74)
 
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 
-$dark-primary: mat-palette($mat-blue-grey, 900);
-$dark-accent: mat-palette($mat-light-blue, A200);
-$dark-warn: mat-palette($mat-pink, A400);
-$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+// $dark-primary: mat-palette($mat-blue-grey, 900);
+// $dark-accent: mat-palette($mat-light-blue, A200);
+// $dark-warn: mat-palette($mat-pink, A400);
+// $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
-.alt-dark-theme{
-    @include angular-material-theme($dark-theme);
-}
+// .alt-dark-theme{
+//     @include angular-material-theme($dark-theme);
+// }
+
+$tab-primary: mat-palette($app-tab-primary, 500);
+$tab-accent: mat-palette($app-tab-primary, 500);
+
+$app-tab-theme: mat-light-theme($tab-primary, $tab-accent);
 
 @include angular-material-theme($my-app-theme);
+@include mat-tabs-theme($app-tab-theme);
+
+

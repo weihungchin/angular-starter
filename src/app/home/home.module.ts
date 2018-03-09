@@ -3,7 +3,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { CommonModule } from "@angular/common";
-import { AuthGuard } from "@app/services";
+import { AuthGuard, MatCustomIconService } from "@app/services";
 import { NgModule } from "@angular/core";
 import { HomeComponent } from "./home.component";
 import { RouterModule } from "@angular/router";
@@ -43,10 +43,11 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
     HomeRoutingModule,
     AngularFireDatabaseModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+
   ],
   exports: [],
   declarations: [HomeComponent, CommonTableComponent],
-  providers: []
+  providers: [MatCustomIconService]
 })
-export class HomeModule {}
+export class HomeModule { }

@@ -21,8 +21,7 @@
       "prefix": "app",
       "styles": [
         "styles.scss",
-        "theme.scss",
-        "../node_modules/font-awesome/css/font-awesome.min.css"
+        "theme.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

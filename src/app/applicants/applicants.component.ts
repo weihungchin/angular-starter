@@ -2,6 +2,8 @@ import { SideNavService } from '@app/services';
 import { AngularFireDatabase } from "angularfire2/database";
 import { Component, OnInit } from "@angular/core";
 import { WebConstants } from "@app/constants/web-constants";
+import { MatIconRegistry } from "@angular/material/icon";
+import { DomSanitizer } from "@angular/platform-browser";
 
 export enum StatusCodeEnum {
   SC = 'Scheduled',
@@ -56,8 +58,8 @@ export class ApplicantsComponent implements OnInit {
 
 
 
-  constructor(private ngFireDB: AngularFireDatabase, private sideNavService:SideNavService) {
-
+  constructor(private ngFireDB: AngularFireDatabase, private sideNavService:SideNavService, private iconRegistry:MatIconRegistry, private ds:DomSanitizer) {
+    // this.iconRegistry.addSvgIcon('app_filter', ds.bypassSecurityTrustResourceUrl('../../assets/action-icons/filter.svg'));
   }
 
   ngOnInit() {
