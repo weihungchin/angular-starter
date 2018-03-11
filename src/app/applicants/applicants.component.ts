@@ -1,4 +1,4 @@
-import { SideNavService } from '@app/services';
+import { SideNavService } from "@app/services";
 import { AngularFireDatabase } from "angularfire2/database";
 import { Component, OnInit } from "@angular/core";
 import { WebConstants } from "@app/constants/web-constants";
@@ -6,13 +6,13 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 
 export enum StatusCodeEnum {
-  SC = 'Scheduled',
-  OH = 'On-Hold',
-  SL = 'Shortlisted',
-  KIV = 'KIV',
-  RJ = 'Rejected',
-  NI = 'Not Interested',
-  DC = 'Declined'
+  SC = "Scheduled",
+  OH = "On-Hold",
+  SL = "Shortlisted",
+  KIV = "KIV",
+  RJ = "Rejected",
+  NI = "Not Interested",
+  DC = "Declined"
 }
 
 export const StatusCodeMap = new Map();
@@ -36,8 +36,7 @@ export class ApplicantsComponent implements OnInit {
     { key: "u", value: "University" }
   ];
 
-  selectedFilterList = [
-  ]
+  selectedFilterList = [];
 
   showFilterList = false;
   showFilter = false;
@@ -49,16 +48,18 @@ export class ApplicantsComponent implements OnInit {
   applicantsData: any;
   isLoading = true;
   statusList: any = [
-    { key: 's', value: "Scheduled" },
-    { key: 'o', value: 'On-Hold' },
-    { key: 'sl', value: 'Shortlisted' }
-  ]
-  selectedStatus = this.statusList[0].key
+    { key: "s", value: "Scheduled" },
+    { key: "o", value: "On-Hold" },
+    { key: "sl", value: "Shortlisted" }
+  ];
+  selectedStatus = this.statusList[0].key;
 
-
-
-
-  constructor(private ngFireDB: AngularFireDatabase, private sideNavService:SideNavService, private iconRegistry:MatIconRegistry, private ds:DomSanitizer) {
+  constructor(
+    private ngFireDB: AngularFireDatabase,
+    private sideNavService: SideNavService,
+    private iconRegistry: MatIconRegistry,
+    private ds: DomSanitizer
+  ) {
     // this.iconRegistry.addSvgIcon('app_filter', ds.bypassSecurityTrustResourceUrl('../../assets/action-icons/filter.svg'));
   }
 
@@ -66,14 +67,10 @@ export class ApplicantsComponent implements OnInit {
     this.getApplicants(WebConstants.APPLICANTS_PATH);
   }
 
-
-
-
   onClickSideCard(e) {
     this.applicantsData = [...this.applicantsData.map(this.setSelected(e))];
     this.selectedApplicant = Object.assign({}, e);
   }
-
 
   toggleFilter() {
     this.showFilter = !this.showFilter;
@@ -93,13 +90,12 @@ export class ApplicantsComponent implements OnInit {
     console.log(this.selectedFilterList);
   }
 
-
   getStatusClass(type, statusCode) {
-    let cssClasses = this.switchCSSClass(type, statusCode);
+    const cssClasses = this.switchCSSClass(type, statusCode);
     return cssClasses;
   }
 
-  toggleSideNav(){
+  toggleSideNav() {
     this.sideNavService.toggle();
   }
 
@@ -112,7 +108,9 @@ export class ApplicantsComponent implements OnInit {
         data => {
           this.applicantsData = [...data];
 
-          this.applicantsData.map(this.bindSelectedAttr).map(this.defaultSelected);
+          this.applicantsData
+            .map(this.bindSelectedAttr)
+            .map(this.defaultSelected);
           this.isLoading = false;
           this.selectedApplicant = { ...this.applicantsData[0] };
           console.log(this.applicantsData);
@@ -125,24 +123,24 @@ export class ApplicantsComponent implements OnInit {
   }
 
   private bindSelectedAttr(item) {
-    item['selected'] = false;
+    item["selected"] = false;
     return item;
   }
   private defaultSelected(item, index) {
-    if (index == 0) {
+    if (index === 0) {
       item.selected = true;
     }
     return item;
   }
   private setSelected(selectedItem) {
-    return (item) => {
-      item.selected = selectedItem.id == item.id;
+    return item => {
+      item.selected = selectedItem.id === item.id;
       return item;
-    }
+    };
   }
 
-  private switchCSSClass(type = 'bullet', statusCode) {
-    let cssClassPrefix = type == 'bullet' ? 'scard-stat--' : 'stat-text--';
+  private switchCSSClass(type = "bullet", statusCode) {
+    const cssClassPrefix = type === "bullet" ? "scard-stat--" : "stat-text--";
 
     let cssClasses;
     switch (statusCode) {
@@ -154,7 +152,7 @@ export class ApplicantsComponent implements OnInit {
         cssClasses = [`${cssClassPrefix}shortlisted`];
         break;
       }
-      case 'OH': {
+      case "OH": {
         cssClasses = [`${cssClassPrefix}onhold`];
         break;
       }

@@ -1,8 +1,18 @@
-import { MatCustomIconService } from '@app/services';
-import { SideNavService } from './../services/side-nav.service';
-import { MatTableDataSource, MatSelectChange, MatSidenav } from "@angular/material";
+import { MatCustomIconService } from "@app/services";
+import { SideNavService } from "./../services/side-nav.service";
+import {
+  MatTableDataSource,
+  MatSelectChange,
+  MatSidenav
+} from "@angular/material";
 import { UserService } from "./../services/user.service";
-import { Component, OnInit, ChangeDetectorRef, OnDestroy, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  OnDestroy,
+  ViewChild
+} from "@angular/core";
 import { MediaMatcher } from "@angular/cdk/layout";
 import { AngularFireDatabase } from "angularfire2/database";
 import {
@@ -43,8 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ];
   mobSelectedSort: any;
 
-  @ViewChild('snav')
-  snav:MatSidenav;
+  @ViewChild("snav") snav: MatSidenav;
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -52,8 +61,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private ngFireDB: AngularFireDatabase,
     private userService: UserService,
     private router: Router,
-    private sideNavService:SideNavService,
-    private customIconService:MatCustomIconService
+    private sideNavService: SideNavService,
+    private customIconService: MatCustomIconService
   ) {
     this.mobQuery = mediaMatcher.matchMedia("(max-width: 760px)");
     console.log(this.mobQuery);
@@ -70,7 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   logout() {
     this.userService.purgeAuth().subscribe(
       res => {
-       this.router.navigateByUrl('');
+        this.router.navigateByUrl("");
       },
       err => console.log(err)
     );
@@ -127,11 +136,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log(sortedData);
   }
 
-  private subscToToggleAction(){
-    this.sideNavService.isToggle.subscribe(
-      () => {
-        this.snav.toggle();
-      }
-    )
+  private subscToToggleAction() {
+    this.sideNavService.isToggle.subscribe(() => {
+      this.snav.toggle();
+    });
   }
 }

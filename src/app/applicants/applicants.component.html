@@ -3,7 +3,7 @@
 
   <div class="side-card-container">
     <div class="custom-side-toolbar">
-      <div class="button-group" style="padding-top:10px;">
+      <div class="button-group" style="padding-top:10px;" fxLayout>
         <button mat-icon-button (click)="toggleSideNav()" style="left:10px;" class="ml-2 mr-3">
           <mat-icon style="color:white" class="pr-3">menu</mat-icon>
         </button>
@@ -17,9 +17,19 @@
           <mat-icon svgIcon="app_search"></mat-icon>
         </button>
 
+        <!-- <div class="spacer"></div>
+        <button mat-icon-button class="mx-2" fxFlex = "1 1 50px" style = "z-index:5">
+          <mat-icon svgIcon="app_notification" style = "z-index:5"></mat-icon>
+        </button>
+        <div class = "mr-2" fxFlex style = "color:white !important;z-index:5">
+          Yee Ping
+        </div> -->
+
       </div>
 
+
     </div>
+
     <mat-tab-group>
       <mat-tab label="Pending (12)" class="side-card-wrapper">
         <!-- <ng-template mat-tab-label>
@@ -135,15 +145,21 @@
     <mat-card class="main-card p-0" *ngIf="!showFilter" [ngClass]="{'flip-out-y': showFilter}">
       <div class="custom-toolbar">
 
-        <div class="right-menu-container" fxLayout fxLayoutAlign = "end" style = "padding-top:10px" >
-          <div class="spacer"></div>
-          <button mat-icon-button class="mx-2" fxFlex = "1 1 50px">
+        <div class="right-menu-container" fxLayout fxLayoutAlign="end" style="padding-top:10px">
+          <div fxFlex="1 1 auto"></div>
+          <button mat-icon-button class="mx-2" fxFlex="1 1 50px">
             <mat-icon svgIcon="app_notification"></mat-icon>
           </button>
-          <div style="color:white;" class = "mr-2" fxFlex>
+          <div  style="color:white;cursor:pointer" class="mr-1" fxFlex="1 1 100px" fxFlexAlign="center" [mat-menu-trigger-for]="menu">
             Yee Ping
+            <mat-icon svgIcon="app_arrow_down" style="height:8px"></mat-icon>
           </div>
+          <div fxFlex="1 1 500px" style="max-width:500"></div>
         </div>
+        <mat-menu x-position="before" #menu="matMenu" overlapTrigger = "false">
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon> Logout</button>
+        </mat-menu>
       </div>
       <div class="main-card-header" fxLayout fxLayoutAlign="start stretch" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column">
         <div fxFlex="20%" fxFlexAlign="center" class="mr-3" fxFlex.md="100%" fxFlex.sm="100%">
