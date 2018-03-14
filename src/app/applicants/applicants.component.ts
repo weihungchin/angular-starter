@@ -1,9 +1,8 @@
+import { DataService } from '@app/services/data.service';
 import { SideNavService } from "@app/services";
-import { AngularFireDatabase } from "angularfire2/database";
 import { Component, OnInit } from "@angular/core";
 import { WebConstants } from "@app/constants/web-constants";
-import { MatIconRegistry } from "@angular/material/icon";
-import { DomSanitizer } from "@angular/platform-browser";
+
 
 export enum StatusCodeEnum {
   SC = "Scheduled",
@@ -30,6 +29,7 @@ StatusCodeMap.set("DC", StatusCodeEnum.DC);
   styleUrls: ["./applicants.component.scss"]
 })
 export class ApplicantsComponent implements OnInit {
+
   filterList = [
     { key: "r", value: "Recruiter" },
     { key: "c", value: "Channel" },
@@ -40,86 +40,45 @@ export class ApplicantsComponent implements OnInit {
 
   showFilterList = false;
   showFilter = false;
-  selectedApplicant: any = {
-    name: "",
-    mobile: "",
-    email: ""
-  };
+  selectedApplicant: any;
   applicantsData: any;
-  isLoading = true;
-  statusList: any = [
-    { key: "s", value: "Scheduled" },
-    { key: "o", value: "On-Hold" },
-    { key: "sl", value: "Shortlisted" }
-  ];
-  selectedStatus = this.statusList[0].key;
+
 
   constructor(
-    private ngFireDB: AngularFireDatabase,
     private sideNavService: SideNavService,
-    private iconRegistry: MatIconRegistry,
-    private ds: DomSanitizer
+    private dataService: DataService
   ) {
-    // this.iconRegistry.addSvgIcon('app_filter', ds.bypassSecurityTrustResourceUrl('../../assets/action-icons/filter.svg'));
   }
 
   ngOnInit() {
     this.getApplicants(WebConstants.APPLICANTS_PATH);
   }
 
-  onClickSideCard(e) {
-    this.applicantsData = [...this.applicantsData.map(this.setSelected(e))];
-    this.selectedApplicant = Object.assign({}, e);
-  }
 
-  toggleFilter() {
-    this.showFilter = !this.showFilter;
-  }
-
-  onAddFilter() {
-    this.showFilterList = !this.showFilterList;
-  }
-
-  onMenuClosed(e) {
-    console.log(e);
-    this.showFilterList = !this.showFilterList;
-  }
-
-  onSelectFilter(e) {
-    this.selectedFilterList = [...this.selectedFilterList, e];
-    console.log(this.selectedFilterList);
-  }
-
-  getStatusClass(type, statusCode) {
-    const cssClasses = this.switchCSSClass(type, statusCode);
-    return cssClasses;
-  }
-
-  toggleSideNav() {
+  onToggleSideNav() {
     this.sideNavService.toggle();
   }
 
-  private getApplicants(path) {
-    this.isLoading = true;
-    this.ngFireDB
-      .list(path)
-      .valueChanges()
-      .subscribe(
-        data => {
-          this.applicantsData = [...data];
+  onClickApplicant(applicant) {
+    this.applicantsData = [...this.applicantsData.map(this.setSelected(applicant))];
+    this.selectedApplicant = { ...applicant };
+  }
 
-          this.applicantsData
+
+  private getApplicants(refName) {
+    this.dataService.read(refName).subscribe(
+      data => {
+        this.applicantsData =
+          data
             .map(this.bindSelectedAttr)
-            .map(this.defaultSelected);
-          this.isLoading = false;
-          this.selectedApplicant = { ...this.applicantsData[0] };
-          console.log(this.applicantsData);
-          // console.log("applicants data", JSON.stringify(this.applicantsData));
-        },
-        err => {
-          console.log(err);
-        }
-      );
+            .map(this.defaultSelected.bind(this));
+        this.selectedApplicant = this.applicantsData.filter(this.filterSelected)[0];
+        console.log(this.selectedApplicant);
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   private bindSelectedAttr(item) {
@@ -127,11 +86,20 @@ export class ApplicantsComponent implements OnInit {
     return item;
   }
   private defaultSelected(item, index) {
-    if (index === 0) {
-      item.selected = true;
+    if (!this.selectedApplicant) {
+       if(index === 0){
+          item.selected = true;
+       }
+      
+    }else{
+       if(this.selectedApplicant && this.selectedApplicant.id == item.id){
+         item.selected = true;
+       }
     }
+
     return item;
   }
+
   private setSelected(selectedItem) {
     return item => {
       item.selected = selectedItem.id === item.id;
@@ -139,25 +107,9 @@ export class ApplicantsComponent implements OnInit {
     };
   }
 
-  private switchCSSClass(type = "bullet", statusCode) {
-    const cssClassPrefix = type === "bullet" ? "scard-stat--" : "stat-text--";
-
-    let cssClasses;
-    switch (statusCode) {
-      case "SC": {
-        cssClasses = [`${cssClassPrefix}scheduled`];
-        break;
-      }
-      case "SL": {
-        cssClasses = [`${cssClassPrefix}shortlisted`];
-        break;
-      }
-      case "OH": {
-        cssClasses = [`${cssClassPrefix}onhold`];
-        break;
-      }
-    }
-
-    return cssClasses;
+  private filterSelected(item) {
+    return item.selected == true;
   }
+
+
 }

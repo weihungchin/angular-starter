@@ -8,16 +8,13 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { environment } from "@env/environment";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatMenuModule } from "@angular/material/menu";
-import { MatIconModule } from "@angular/material/icon";
-import { RouterModule } from "@angular/router";
 import { LandingComponent } from "./landing/landing.component";
 import { AngularFireModule } from "angularfire2";
-import { UserService, AuthGuard, SideNavService } from "@app/services";
+import { FirebaseUserService, AuthGuard, SideNavService, UserService } from "@app/services";
 import { AngularFireAuthModule } from "angularfire2/auth";
-import { ApplicantsComponent } from './applicants/applicants.component';
 import { ShowAuthedDirective } from './shared/show-authed.directive';
+import { DataService, FirestoreDataService } from '@app/services/data.service';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 
 
@@ -32,10 +29,22 @@ import { ShowAuthedDirective } from './shared/show-authed.directive';
     AppRoutingModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
     LoginModule,
     CoreComponentModule
   ],
-  providers: [UserService, AuthGuard, ShowAuthedDirective, SideNavService],
+  providers: [
+  {
+    provide: UserService,
+    useClass: FirebaseUserService
+  }, 
+  {
+    provide: DataService,
+    useClass: FirestoreDataService
+  },
+  AuthGuard, 
+  ShowAuthedDirective, 
+  SideNavService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

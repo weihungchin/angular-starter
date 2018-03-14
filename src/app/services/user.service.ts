@@ -1,4 +1,3 @@
-import { Router } from "@angular/router";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
@@ -8,8 +7,20 @@ import { User } from "@app/models";
 import "rxjs/add/operator/distinctUntilChanged";
 import "rxjs/add/operator/map";
 
+export abstract class UserService {
+  abstract login(email: string, password: string);
+  abstract attemptAuth();
+  abstract purgeAuth();
+  abstract getProfile();
+  abstract updateProfile();
+  public isAuthenticated;
+  public currentUser;
+
+}
+
+
 @Injectable()
-export class UserService {
+export class FirebaseUserService extends UserService {
   private currentUserSubject = new BehaviorSubject<User>(new User());
   public currentUser = this.currentUserSubject
     .asObservable()
@@ -18,27 +29,23 @@ export class UserService {
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
-  constructor(private ngFireAuth: AngularFireAuth, private router: Router) {}
+  constructor(private ngFireAuth: AngularFireAuth) {
+    super();
+  }
 
-  login(email, password): Observable<any> {
+  login(email: string, password: string): Observable<any> {
     return this.emailLogin(email, password).map(res =>
       this.handleAuthUser(res)
     );
   }
 
-  updateUserProfile() {
+  updateProfile() {
     // this.ngFireAuth.auth.currentUser.updateProfile({displayName:'', photoURL:''})
-  }
-
-  private emailLogin(email, password): Observable<any> {
-    return Observable.fromPromise(
-      this.ngFireAuth.auth.signInWithEmailAndPassword(email, password)
-    );
   }
 
   // call this once in app.component.ts only
   attemptAuth() {
-   this.ngFireAuth.authState.map(res => {
+    this.ngFireAuth.authState.map(res => {
       this.handleAuthUser(res);
       return res;
     }).subscribe(
@@ -47,8 +54,8 @@ export class UserService {
     );
   }
 
-  getUserProfile(): Observable<any> {
-   return this.ngFireAuth.authState.map(res => {
+  getProfile(): Observable<any> {
+    return this.ngFireAuth.authState.map(res => {
       this.handleAuthUser(res);
       return res;
     });
@@ -62,11 +69,18 @@ export class UserService {
     });
   }
 
-  private logout() {
+
+  private emailLogin(email: string, password: string): Observable<any> {
+    return Observable.fromPromise(
+      this.ngFireAuth.auth.signInWithEmailAndPassword(email, password)
+    );
+  }
+
+  private logout(): Observable<any> {
     return Observable.fromPromise(this.ngFireAuth.auth.signOut());
   }
 
-  private handleAuthUser(res) {
+  private handleAuthUser(res): void {
     if (res) {
       console.log(res);
       // this.router.navigateByUrl("home");
@@ -79,7 +93,7 @@ export class UserService {
     }
   }
 
-  private toUserVO(res) {
+  private toUserVO(res): User {
     const user = new User();
     user.email = res.email;
     user.photoUrl = res.photoUrl;

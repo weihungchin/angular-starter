@@ -4,10 +4,7 @@ import {
   ViewChild,
   AfterViewInit,
   Input,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
-  OnChanges
 } from "@angular/core";
 import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 

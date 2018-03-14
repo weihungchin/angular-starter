@@ -1,0 +1,116 @@
+
+  <div class="custom-side-toolbar">
+    <div class="button-group" style="padding-top:10px;" fxLayout>
+      <button mat-icon-button (click)="toggleSideNav()" style="left:10px;" class="ml-2 mr-3">
+        <mat-icon style="color:white" class="pr-3">menu</mat-icon>
+      </button>
+      <button mat-icon-button class="mr-2">
+        <mat-icon svgIcon="app_square_plus"></mat-icon>
+      </button>
+      <button mat-icon-button class="mr-2">
+        <mat-icon svgIcon="app_filter"></mat-icon>
+      </button>
+      <button mat-icon-button class="mr-2">
+        <mat-icon svgIcon="app_search"></mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-tab-group>
+    <mat-tab label="Pending (12)" class="side-card-wrapper">
+      <div class="side-card-wrapper" style="cursor:pointer;">
+        <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
+        <mat-card *ngFor="let person of applicantsData" (click)="onClickSideCard(person)" [ngClass]="{'side-card-selected':person.selected, 'side-card':!person.selected}">
+
+          <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
+            <div fxFlex="15%" fxFlexAlign="center">
+              <img mat-card-avatar src="../../assets/images/generic-w-90.jpg" alt="Avatar Photo">
+            </div>
+            <div fxFlex="50%" fxFlexAlign="stretch">
+              <h6> {{person.name}}</h6>
+              <div fxLayout fxLayoutAlign="start start" class="mt-1">
+                <mat-icon class="text-gray side-card-icon" fxFlex="15%">person</mat-icon> &nbsp;
+                <div class="text-gray side-card-text" fxFlex>UI / UX</div>
+              </div>
+              <div fxLayout fxLayoutAlign="start start">
+                <mat-icon class="text-gray side-card-icon" fxFlex="15%">date_range</mat-icon> &nbsp;
+                <div class="text-gray side-card-text" fxFlex>22/02/2018</div>
+              </div>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div fxFlex="30%" fxFlexAlign="center" fxLayout fxLayoutAlign="space-around" fxLayoutGap="10px">
+              <div class="scard-stat" fxFlexAlign="center" [ngClass]="getStatusClass('bullet', person.statusCode)"></div>
+              <div fxFlex fxFlexAlign="center" [ngClass]="getStatusClass('text', person.statusCode)">{{person.statusDesc}}</div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+
+    </mat-tab>
+    <mat-tab label="Accepted (54)">
+
+      <div class="side-card-wrapper" style="cursor:pointer">
+        <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
+        <mat-card *ngFor="let person of applicantsData" (click)="onClickSideCard(person)" [ngClass]="{'side-card-selected':person.selected, 'side-card':!person.selected}">
+
+          <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
+            <div fxFlex="20%" fxFlexAlign="center">
+              <img mat-card-avatar src="../../assets/images/generic-w-90.jpg" alt="Avatar Photo">
+            </div>
+            <div fxFlex="50%" fxFlexAlign="stretch">
+              <h6> {{person.name}}</h6>
+              <div fxLayout fxLayoutAlign="start start" class="mt-1">
+                <mat-icon class="text-gray side-card-icon" fxFlex="15%">person</mat-icon> &nbsp;
+                <div class="text-gray side-card-text" fxFlex>UI / UX</div>
+              </div>
+              <div fxLayout fxLayoutAlign="start start">
+                <mat-icon class="text-gray side-card-icon" fxFlex="15%">date_range</mat-icon> &nbsp;
+                <div class="text-gray side-card-text" fxFlex>22/02/2018</div>
+              </div>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div fxFlex fxFlexAlign="center">
+              Accepted
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Rejected (46)">
+
+      <div class="side-card-wrapper" style="cursor:pointer">
+        <mat-spinner class="spinner-container" *ngIf="isLoading"></mat-spinner>
+        <mat-card *ngFor="let person of applicantsData" (click)="onClickSideCard(person)" [ngClass]="{'side-card-selected':person.selected, 'side-card':!person.selected}">
+
+          <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around space-around" fxLayoutGap="0px" fxLayoutGap.xs="0">
+            <div fxFlex="20%" fxFlexAlign="center">
+              <img mat-card-avatar src="../../assets/images/generic-w-90.jpg" alt="Avatar Photo">
+            </div>
+            <div fxFlex="50%" fxFlexAlign="stretch">
+              <h6> {{person.name}}</h6>
+              <div fxLayout fxLayoutAlign="start start" class="mt-1">
+                <mat-icon class="text-gray side-card-icon" fxFlex="15%">person</mat-icon> &nbsp;
+                <div class="text-gray side-card-text" fxFlex>UI / UX</div>
+              </div>
+              <div fxLayout fxLayoutAlign="start start">
+                <mat-icon class="text-gray side-card-icon" fxFlex="15%">date_range</mat-icon> &nbsp;
+                <div class="text-gray side-card-text" fxFlex>22/02/2018</div>
+              </div>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div fxFlex fxFlexAlign="center">
+              Rejected
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+

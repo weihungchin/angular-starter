@@ -22,7 +22,7 @@ export class LandingComponent implements OnInit {
   }
 
   private getUserProfile() {
-    this.userService.getUserProfile().subscribe(
+    this.userService.getProfile().subscribe(
       res => {
         this.handleUser(res);
       },

@@ -3,7 +3,6 @@ import { MatCheckboxChange } from "@angular/material/checkbox";
 import {
   MatSelectionList,
   MatSelectionListChange,
-  MatListOption
 } from "@angular/material/list";
 
 @Component({

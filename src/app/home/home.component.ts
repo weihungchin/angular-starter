@@ -19,8 +19,7 @@ import {
   trigger,
   keyframes,
   animate,
-  transition,
-  style
+  transition
 } from "@angular/animations";
 import * as kf from "./keyframes";
 import { Router } from "@angular/router";
@@ -64,9 +63,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     private sideNavService: SideNavService,
     private customIconService: MatCustomIconService
   ) {
-    this.mobQuery = mediaMatcher.matchMedia("(max-width: 760px)");
+    this.mobQuery = this.mediaMatcher.matchMedia("(max-width: 760px)");
     console.log(this.mobQuery);
-    this.mobQueryListener = () => cdRef.detectChanges();
+    this.mobQueryListener = () => this.cdRef.detectChanges();
     this.mobQuery.addListener(this.mobQueryListener);
   }
 
@@ -78,7 +77,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   logout() {
     this.userService.purgeAuth().subscribe(
-      res => {
+      () => {
         this.router.navigateByUrl("");
       },
       err => console.log(err)

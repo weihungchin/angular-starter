@@ -1,4 +1,3 @@
-import { CommonTableComponent } from "@app/home/common-table/common-table.component";
 import { AuthGuard } from "@app/services";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";

@@ -1,4 +1,4 @@
-import { keyframes, style, AnimationStyleMetadata } from "@angular/animations";
+import { style, AnimationStyleMetadata } from "@angular/animations";
 
 export const slideOutLeft: AnimationStyleMetadata[] = [
   style({ transform: "translate3d(0, 0, 0)", offset: 0 }),

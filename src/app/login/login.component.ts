@@ -4,19 +4,17 @@ import {
   Component,
   OnInit,
   AfterViewInit,
-  AfterViewChecked,
   ChangeDetectorRef,
   ElementRef
 } from "@angular/core";
-import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import "rxjs/add/operator/debounceTime";
 import {
   trigger,
   state,
   style,
   animate,
-  transition,
-  keyframes
+  transition
 } from "@angular/animations";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -161,6 +159,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.form.valueChanges.debounceTime(200).subscribe(val => {
       this.disableLogin = this.form.invalid;
       this.matSnackBar.dismiss();
+      console.log(val);
     });
   }
 

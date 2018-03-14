@@ -3,10 +3,10 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { CommonModule } from "@angular/common";
-import { AuthGuard, MatCustomIconService } from "@app/services";
+import { MatCustomIconService } from "@app/services";
 import { NgModule } from "@angular/core";
 import { HomeComponent } from "./home.component";
-import { RouterModule } from "@angular/router";
+
 import {
   MatTabsModule,
   MatTableModule,

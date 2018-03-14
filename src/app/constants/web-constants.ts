@@ -1,4 +1,5 @@
 export class WebConstants {
 
-    public static readonly APPLICANTS_PATH ="/applicants";
+    public static readonly APPLICANTS_PATH ="applicants";
+
 }

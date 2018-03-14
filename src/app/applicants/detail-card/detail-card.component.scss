@@ -1,0 +1,93 @@
+@import "../applicants.component.scss";
+@import "../../../assets/scss/color-map.scss";
+
+
+
+.main-avatar {
+    display:block; 
+    width:140px;
+    height:140px;
+    //margin:auto;
+  }
+  
+  .main-card{
+    min-height: 100%;
+  }
+  
+  
+:host /deep/ .mat-select-value {
+  
+  color:rgba(0, 183, 255, 0.904) !important;
+}
+
+:host /deep/ .mat-form-field-infix {
+  border-top:none !important;
+}
+
+:host /deep/ .mat-form-field-underline {
+  bottom: 0;
+}
+
+:host /deep/ .mat-form-field-wrapper {
+  padding-bottom:0;
+}
+
+  
+  .main-card-header{
+    padding:134px 120px 30px 120px; //70px 120px 30px 120px
+  }
+  
+  @media(max-width:1420px){
+    .main-card-header{
+      padding:134px 10px 30px 40px;
+    }
+    
+  }
+  
+  .notif-spacer{
+    flex:1 1 auto; 
+    max-width:1150px !important;
+  }
+  
+  .main-card-text>mat-icon, .main-card-text>div{
+    vertical-align:middle;
+    color:$grayText;
+  }
+  
+  .main-card-text>div, .main-card-label {
+    font-size:$mainCardFS;
+  }
+  .main-card-text>mat-icon{
+    font-size:$iconFS;
+  }
+  
+  // .main-card{
+  //   margin-top:$headerHeight;
+  // }
+  
+  .custom-toolbar{
+    height:$headerHeight;
+    background:map-get($map: $color-map, $key: "secondary-green");
+    top:0;
+    position:fixed;
+    width:100%;
+    z-index:$rightHeaderZI;
+  }
+  
+  .row-wrapper{
+    padding:0;
+    font-size:$mainCardFS;
+  }
+  
+  @media(max-width:1579px) and (min-width:1280px){
+    .row-wrapper{
+      padding:0 10px;
+    }
+  }
+  
+  @media(min-width:1580px){
+    .row-wrapper{
+      padding:0 120px 0 100px;
+    }
+  }
+  

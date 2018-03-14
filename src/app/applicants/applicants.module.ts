@@ -18,6 +18,10 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatSelectModule } from "@angular/material/select";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { SummaryCardComponent } from './summary-card/summary-card.component';
+import { DetailCardComponent } from './detail-card/detail-card.component';
+import { MatInputModule } from "@angular/material/input";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -36,10 +40,14 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatCheckboxModule,
     MatTabsModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [],
-  declarations: [ApplicantsComponent, FilterComponent],
+  declarations: [ApplicantsComponent, FilterComponent, SummaryCardComponent, DetailCardComponent],
   providers: []
 })
 export class ApplicantsModule {}
+ 
